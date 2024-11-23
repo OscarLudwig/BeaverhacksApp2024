@@ -17,8 +17,12 @@ body {
   width: 250px;
   height: 250px;
   padding-top: 20px;
-  padding-left: 20px;;
+  padding-left: 20px;
   border-radius: 20px;
 
   margin: 15px;
+}
+
+.title {
+  font-size: xx-large;
 }

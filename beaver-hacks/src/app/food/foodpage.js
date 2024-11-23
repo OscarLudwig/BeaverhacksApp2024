@@ -5,12 +5,11 @@ export default async function FoodPage() {
   let resturants = await getAllResturants();
 
   return (
-    <ul>
+    <div>
       {resturants.map((value, _) => (
-        <li>
-          <FoodPlace place={value} />
-        </li>
+        <FoodPlace name={value.Name} openHour={value.OpeningHour} closingHour={value.ClosingHour}
+          rating={value.Rating} numberOfRatings={value.NumberOfRatings} description={value.description} />
       ))}
-    </ul>
+    </div>
   );
 }

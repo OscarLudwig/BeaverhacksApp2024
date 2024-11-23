@@ -4,7 +4,9 @@ export default function FoodPlace(props) {
       <span className="foodtitle">{props.name}</span>
       <br />
       <br />
-      <span>Hours: {props.openingHour} to {props.closingHour}</span>
+      {(props.openingHour != null && props.closingHour != null) ?
+        <span>Hours: {props.openingHour} to {props.closingHour}</span> :
+        <span>Closed today</span> }
       <br />
       <p>{props.rating} star from {props.numberOfRatings} ratings.</p>
       <p>{props.description}</p>

@@ -14,11 +14,11 @@ export default function TitleBar() {
           />
         </a>
         <nav>
-          <a href="#" className="hover:underline">Home</a>
-          <a href="#" className="hover:underline">Message board</a>
-          <a href="#" className="hover:underline">Food</a>
-          <a href="#" className="hover:underline">Clubs</a>
-          <a href="#" className="hover:underline">Events</a>
+          <a href="/" className="hover:underline">Home</a>
+          <a href="/message-board" className="hover:underline">Message board</a>
+          <a href="/food" className="hover:underline">Food</a>
+          <a href="/clubs" className="hover:underline">Clubs</a>
+          <a href="/events" className="hover:underline">Events</a>
         </nav>
       </div>
       <div className="right">

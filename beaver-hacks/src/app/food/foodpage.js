@@ -4,6 +4,6 @@ export default function FoodPage() {
   // fetch
   return (
     /* for place in responses add foodplace */
-    <FoodPlace title="Test" />
+    <FoodPlace title="Burger Place" url="https://letmegooglethat.com/?q=Robotics" hoursStart="1" hoursEnd="2" />
   );
 }

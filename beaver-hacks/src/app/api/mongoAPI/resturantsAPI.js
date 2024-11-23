@@ -79,7 +79,7 @@ async function updateRating(Name, newRating) {
         Name
     }, {
         $set: {
-            Rating: newRating,
+            Rating: rating,
             NumberOfRatings: NumberOfRatings + 1
         }
     });

@@ -1,38 +1,36 @@
 import { hashPassword } from "../../utils/hash";
-import { MongoClient } from "mongodb";
+import { createUser, getUser } from "./usersAPI";
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
     return res.status(405).json({ message: "Method not allowed" });
   }
 
-  const { username, email, password } = req.body;
+  const { username, email, password, firstName, lastName, osuVerified, createdDate } = req.body;
 
-  if (!username || !email || !password) {
-    return res.status(400).json({ message: "Username, Email and password are required." });
+  if (!username || !email || !password || !firstName || !lastName || createdDate === undefined || osuVerified === undefined) {
+    return res.status(400).json({
+      message: "Username, email, password, first name, last name, OSU verification, and created date are required.",
+    });
   }
 
   try {
-    console.log(process.env.DATABASE_URL);
-    const client = await MongoClient.connect(process.env.DATABASE_URL);
-    const db = client.db();
-
-    const existingUser = await db.collection("users").findOne({ username });
+    // Check if the user already exists
+    const existingUser = await getUser(username);
 
     if (existingUser) {
-      client.close();
       return res.status(409).json({ message: "User already exists." });
     }
 
+    // Hash the password
     const hashedPassword = await hashPassword(password);
 
-    await db.collection("users").insertOne({ username, email, password: hashedPassword });
-
-    client.close();
+    // Create the new user
+    await createUser(username, hashedPassword, osuVerified, createdDate, email, firstName, lastName);
 
     return res.status(201).json({ message: "User registered successfully." });
   } catch (error) {
-    console.error(error);
+    console.error("Error creating user:", error);
     return res.status(500).json({ message: "Something went wrong." });
   }
 }

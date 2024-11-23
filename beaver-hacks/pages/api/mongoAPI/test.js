@@ -1,5 +1,6 @@
 const { MongoClient } = require("mongodb");
 const dotenv = require("dotenv");
+const { createResturant } = require("./resturantsAPI");
 dotenv.config();
 
 const connectionString = process.env.MONGODB_STRING;
@@ -19,6 +20,7 @@ async function connectToDatabase() {
       throw new Error("Failed to connect to the database");
     }
   }
+  
   
   async function createUser(Username, Password, OSUverified, CreatedDate, Email, FirstName, LastName) {
     const users = await connectToDatabase();
@@ -44,12 +46,34 @@ async function connectToDatabase() {
     const result = await users.insertOne(newUser);
     return result;
   }
+  
+
+  async function createDefaultResturant() {
+    const users = await connectToDatabase();
+    const newResturant = {
+      Name : "Subway",
+      Rating : 3,
+      NumberOfRatings : 3,
+      Description : "subway desc",
+      OpeningHour : 1,
+      ClosingHour : 2,
+      Location : "monroe"
+    };
+
+    const res = createResturant("Subway",3,3,"subway desc",1,2,"monroe");
+    return res;
+  }
+
+
+
 
 // Wrap logic in an async function
 (async () => {
   try {
-    const created_user = await createUser("Username", "Password", true, new Date(), "email@example.com", "First", "Last");
-    console.log("Created User:", created_user);
+    //const created_user = await createUser("Username", "Password", true, new Date(), "email@example.com", "First", "Last");
+    //console.log("Created User:", created_user);
+    const res = await createDefaultResturant();
+    console.log("Res:", res);
   } catch (err) {
     console.error("Error:", err);
   } finally {

@@ -1,3 +1,4 @@
 /beaver-hacks/node_modules
 /beaver-hacks/.next
 /beaver-hacks/.env
+.DS_Store

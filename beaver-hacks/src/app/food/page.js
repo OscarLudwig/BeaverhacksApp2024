@@ -1,6 +1,7 @@
 import Image from "next/image";
 import TitleBar from "../titlebar"; // Adjust the path if necessary
 import Footer from "../footer"; // Import the Footer component
+import FoodPage from "./foodpage";
 
 export default function About() {
   return (
@@ -16,6 +17,7 @@ export default function About() {
           height={400} // Adjust the height as needed
           priority
         />
+        <FoodPage />
       </main>
       <Footer /> {/* Add the Footer component */}
     </div>

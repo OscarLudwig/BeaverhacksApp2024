@@ -1,7 +1,7 @@
 export default function FoodPlace(props) {
   return (
-    <div className="foodtitle">
-      <span className="title">{props.name}</span>
+    <div className="foodplace">
+      <span className="foodtitle">{props.name}</span>
       <br />
       <br />
       <span>Hours: {props.openingHour} to {props.closingHour}</span>

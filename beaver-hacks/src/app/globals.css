@@ -1,11 +1,12 @@
 :root {
+  --light: 231, 231, 231;
+  --dark: 43, 43, 43;
+  --highlight: 230, 122, 0;
   --background: #1e1e1e;
   --foreground: #000000;
   --text: #ffffff;
   --osu-color: #C34B24;
-  --highlight: #e67a00;
 }
-
 
 
 body {
@@ -222,4 +223,52 @@ body, html {
 .footer a {
   text-decoration: none; /* Remove underline from links */
   color: var(--text); /* Ensure link color matches text color */
+}
+
+body {
+  color: rgb(var(--light));
+  background: rgb(var(--dark));
+  font-family: Arial;
+}
+
+.foodplace {
+  background-color: rgba(var(--highlight), 0.08);
+  outline: solid rgb(var(--highlight)) 5px;
+
+  width: 250px;
+  height: 250px;
+  padding: 20px;
+  border-radius: 20px;
+
+  margin: 15px;
+}
+
+.foodtitle {
+  font-size: xx-large;
+}
+
+.campusevent {
+  background-color: rgba(var(--highlight), 0.08);
+  outline: solid rgb(var(--highlight)) 5px;
+
+  width: 750px;
+  height: 100px;
+  padding: 20px;
+  border-radius: 20px;
+
+  margin: 15px;
+}
+
+.campustitle:link {
+  font-size: x-large;
+}
+
+.campustitle:link {
+  color:rgb(var(--light));
+  text-decoration: none;
+}
+
+.campustitle:visited {
+  color:rgb(var(--light));
+  text-decoration: none;
 }

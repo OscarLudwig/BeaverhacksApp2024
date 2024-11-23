@@ -7,8 +7,9 @@ const resturantsSchema = new Schema({
     Rating: Number,
     NumberOfRatings: Number,
     Description: String,
-    OpeningHour: Number,
-    ClosingHour: Number,
+    // opening and closing hours are arrays with the index being the day starting at 0 for monday
+    OpeningHour: [Number],
+    ClosingHour: [Number],
     Location: String,
 })
 

@@ -6,11 +6,13 @@ export default async function handler(req, res) {
     return res.status(405).json({ message: "Method not allowed" });
   }
 
-  const { username, email, password, firstName, lastName, osuVerified, createdDate } = req.body;
+  const { username, email, password, firstName, lastName} = req.body;
+  osuVerified = false;
+  createdDate = new Date();
 
-  if (!username || !email || !password || !firstName || !lastName || createdDate === undefined || osuVerified === undefined) {
+  if (!username || !email || !password || !firstName || !lastName) {
     return res.status(400).json({
-      message: "Username, email, password, first name, last name, OSU verification, and created date are required.",
+      message: "Username, email, password, first name, last name,",
     });
   }
 

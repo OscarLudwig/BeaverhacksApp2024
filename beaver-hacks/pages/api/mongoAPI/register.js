@@ -1,5 +1,6 @@
-import { hashPassword } from "../../utils/hash";
-import { createUser, getUser } from "./mongoAPI/usersAPI";
+import { hashPassword } from "../../../utils/hash";
+import { createUser, getUser } from "./usersAPI";
+
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
@@ -7,8 +8,8 @@ export default async function handler(req, res) {
   }
 
   const { username, email, password, firstName, lastName} = req.body;
-  osuVerified = false;
-  createdDate = new Date();
+  const osuVerified = false;
+  const createdDate = new Date();
 
   if (!username || !email || !password || !firstName || !lastName) {
     return res.status(400).json({

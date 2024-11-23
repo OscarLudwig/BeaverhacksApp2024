@@ -1,4 +1,4 @@
-import { verifyPassword } from "../../utils/hash";
+import { verifyPassword } from "../../../utils/hash";
 import { getUser } from "./usersAPI";
 
 export default async function handler(req, res) {

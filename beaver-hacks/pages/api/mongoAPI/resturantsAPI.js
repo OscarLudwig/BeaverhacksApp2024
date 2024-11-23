@@ -109,4 +109,4 @@ async function updateResturant(Name, Rating, NumberOfRatings, Description, Openi
     return result;
 }
 
-// export { createResturant, getAllResturants, getResturant, updateRating, deleteResturant, updateResturant };
+export { createResturant, getAllResturants, getResturant, updateRating, deleteResturant, updateResturant };

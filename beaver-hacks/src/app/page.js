@@ -7,7 +7,15 @@ export default function Home() {
     <div className="container">
       <TitleBar />
       <main className="main">
-        <p>Welcome!!!</p>
+      <h1>Welcome</h1>
+        <Image
+          className="logo"
+          src="/logo.png"
+          alt="Logo"
+          width={400} // Adjust the width as needed
+          height={400} // Adjust the height as needed
+          priority
+        />
       </main>
       <Footer /> {/* Add the Footer component */}
     </div>

@@ -1,9 +1,4 @@
-<<<<<<< HEAD
-'use client'
-
-=======
 "use client"
->>>>>>> main
 import { useState } from "react";
 
 export default function Login() {

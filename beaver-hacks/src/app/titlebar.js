@@ -54,10 +54,10 @@ export default function TitleBar() {
         </button>
         {isLoggedIn ? (
           <button className="button logout" onClick={handleLogout}>
-            Logout 
+            Logout  
           </button>
         ) : (
-          <button className="button login">
+          <button className="button login" onClick={() => window.location.href = '/login'}>
             Login
           </button>
         )}

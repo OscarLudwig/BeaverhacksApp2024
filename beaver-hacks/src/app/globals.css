@@ -196,12 +196,12 @@ body, html {
   background-color: #e2e8f0; /* bg-gray-200 */
 }
 
-.titlebar .button.login {
+.titlebar .button .login {
   background-color: var(--highlight);
-  color: var(--text);
+  color: var(--osu-color);
 }
 
-.titlebar .button.login:hover {
+.titlebar .button .login:hover {
   opacity: 0.9;
 }
 

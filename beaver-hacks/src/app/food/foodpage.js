@@ -1,9 +1,16 @@
 import FoodPlace from "./foodplace";
+import { getAllResturants } from '';
 
 export default function FoodPage() {
-  // fetch
+  let resturants = getAllResturants();
+
   return (
-    /* for place in responses add foodplace */
-    <FoodPlace title="Burger Place" url="https://letmegooglethat.com/?q=Robotics" hoursStart="1" hoursEnd="2" />
+    <ul>
+      {resturants.map((value, _) => (
+        <li>
+          <FoodPlace place={value} />
+        </li>
+      ))}
+    </ul>
   );
 }

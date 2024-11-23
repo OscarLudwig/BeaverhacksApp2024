@@ -1,14 +1,17 @@
 import Image from 'next/image'
 
 export default function FoodPlace(props) {
+  let place = props.place
+
   return (
     <div className="foodplace">
-      <a href={props.url}>{props.title}</a>
+      <span>{place.Name}</span>
       <br></br>
+      <span>Hours: {place.OpeningHour} to {place.ClosingHour}</span>
       <br></br>
-      <span>Hours: {props.hoursStart} to {props.hoursEnd}</span>
+      <p>{place.Rating} from {place.NumberOfRatings}</p>
       <br></br>
-      <p>{props.description}</p>
+      <p>{place.Description}</p>
     </div>
   );
 }

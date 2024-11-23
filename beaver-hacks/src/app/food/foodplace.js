@@ -1,6 +1,6 @@
 export default function FoodPlace(props) {
   return (
-    <div className="foodplace">
+    <div className="foodtitle">
       <span className="title">{props.name}</span>
       <br />
       <br />

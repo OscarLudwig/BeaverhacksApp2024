@@ -1,8 +1,8 @@
 import "@/app/food/foodplace"
-import FoodPage from "./food/foodpage";
+import CampusPage from "./campuslife/campuspage";
 
 export default function Home() {
   return (
-    <FoodPage />
+    <CampusPage />
   );
 }

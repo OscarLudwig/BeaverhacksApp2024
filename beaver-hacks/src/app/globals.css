@@ -1,52 +1,225 @@
 :root {
-  --light: 231, 231, 231;
-  --dark: 43, 43, 43;
-  --highlight: 230, 122, 0;
+  --background: #1e1e1e;
+  --foreground: #000000;
+  --text: #ffffff;
+  --osu-color: #C34B24;
+  --highlight: #e67a00;
 }
+
+
 
 body {
-  color: rgb(var(--light));
-  background: rgb(var(--dark));
-  font-family: Arial;
+  color: var(--text); /* Set text color to foreground */
+  background-color: var(--background); /* Set background color to background */
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
 }
 
-.foodplace {
-  background-color: rgba(var(--highlight), 0.08);
-  outline: solid rgb(var(--highlight)) 5px;
-
-  width: 250px;
-  height: 250px;
-  padding: 20px;
-  border-radius: 20px;
-
-  margin: 25px;
+body, html {
+  height: 100%;
+  margin: 0;
 }
 
-.foodtitle {
-  font-size: xx-large;
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  text-align: center;
+  gap: 16px;
+  font-family: var(--font-geist-sans);
+  min-height: 100vh;
 }
 
-.campusevent {
-  background-color: rgba(var(--highlight), 0.08);
-  outline: solid rgb(var(--highlight)) 5px;
-
-  width: 750px;
-  padding: 20px;
-  border-radius: 20px;
-
-  margin: 25px;
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+  flex: 1; /* Ensure the main content takes up the remaining space */
 }
 
-.campustitle:link {
-  font-size: x-large;
+.main.sm {
+  align-items: flex-start;
 }
 
-.campustitle:link {
-  color:rgb(var(--light));
+.list {
+  list-style: decimal inside;
+  text-align: center;
+  font-family: var(--font-geist-mono);
+}
+
+.list.sm {
+  text-align: left;
+}
+
+.list-item {
+  margin-bottom: 2px;
+}
+
+.code {
+  background-color: rgba(0, 0, 0, 0.05);
+  padding: 0.5px 1px;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.code.dark {
+  background-color: rgba(255, 255, 255, 0.06);
+}
+
+.button-container {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  flex-direction: column;
+}
+
+.button-container.sm {
+  flex-direction: row;
+}
+
+.button {
+  border-radius: 9999px;
+  border: 1px solid transparent;
+  transition: background-color 0.3s, border-color 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  padding: 0 16px;
+  font-size: 14px;
+}
+
+.button.sm {
+  height: 48px;
+  padding: 0 20px;
+  font-size: 16px;
+}
+
+.button.primary {
+  background-color: var(--foreground);
+  color: var(--background);
+}
+
+.button.primary:hover {
+  background-color: #383838;
+}
+
+.button.primary.dark:hover {
+  background-color: #ccc;
+}
+
+.button.secondary {
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+.button.secondary.dark {
+  border-color: rgba(255, 255, 255, 0.145);
+}
+
+.button.secondary:hover {
+  background-color: #f2f2f2;
+  border-color: transparent;
+}
+
+.button.secondary.dark:hover {
+  background-color: #1a1a1a;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  gap: 2px;
   text-decoration: none;
 }
 
-.campustitle:visited {
-  color:rgb(var(--light));
+.link:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* Add these styles to globals.css */
+
+.titlebar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  background-color: var(--foreground); /* Set background color to foreground */
+  color: var(--text); /* Set text color to text */
+  border-radius: 50px;
+  margin-top: 20px; /* Adjust this value as needed */
+  height: 35px; /* Set a fixed height for the title bar */
+}
+
+.titlebar .left {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.titlebar nav {
+  display: flex;
+  gap: 16px;
+}
+
+.titlebar nav a {
   text-decoration: none;
+  color: inherit;
+}
+
+.titlebar nav a:hover {
+  text-decoration: underline;
+}
+
+.titlebar .right {
+  display: flex;
+  gap: 16px;
+  margin-left: 16px;
+}
+
+.titlebar .button {
+  background-color: var(--background); /* Set button background color to background */
+  color: var(--text); /* Set button text color to text */
+  font-weight: bold;
+  padding: 8px 24px;
+  border-radius: 9999px;
+  border: none;
+  cursor: pointer;
+}
+
+.titlebar .button:hover {
+  background-color: #e2e8f0; /* bg-gray-200 */
+}
+
+.titlebar .button.login {
+  background-color: var(--highlight);
+  color: var(--text);
+}
+
+.titlebar .button.login:hover {
+  opacity: 0.9;
+}
+
+.logo {
+  max-width: 100%;
+  height: auto;
+  background-color: var(--background); /* Ensure the background is transparent */
+}
+
+.footer {
+  width: 100%;
+  background-color: var(--foreground); /* Set background color to foreground */
+  color: var(--text); /* Set text color to text */
+  padding: 10px 0; /* Adjust padding to remove any extra space */
+  text-align: center; /* Optional: Center the text */
+  margin: 0; /* Ensure no margin is applied */
+}
+
+.footer a {
+  text-decoration: none; /* Remove underline from links */
+  color: var(--text); /* Ensure link color matches text color */
 }

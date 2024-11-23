@@ -1,24 +1,14 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-  --osu-color: rgb(195, 75, 36);
-}
+  --light: #e7e7e7;
+  --dark: #2b2b2b;
+  --highlight: #C34B24;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  color: var(--light);
+  background: var(--dark);
+  font-family: Arial;
 }
 
 /* Custom OSU color class */

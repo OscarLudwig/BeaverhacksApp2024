@@ -24,7 +24,7 @@ export default function TitleBar() {
         </button>
         <button
           className="text-white font-bold py-2 px-6 rounded-full hover:opacity-90"
-          style={{ backgroundColor: 'var(--osu-color)' }}
+          style={{ backgroundColor: 'var(--highlight)' }}
         >
           Login
         </button>

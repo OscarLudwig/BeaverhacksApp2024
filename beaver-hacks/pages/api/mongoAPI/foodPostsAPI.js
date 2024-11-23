@@ -1,7 +1,9 @@
 import { MongoClient } from "mongodb";
 import { getResturant, updateRating } from "./resturantsAPI";
+import dotenv from "dotenv";
+dotenv.config();
 
-const connectionString = process.env.MONGODB_URI;
+const connectionString = process.env.MONGODB_STRING;
 const client = new MongoClient(connectionString, { useNewUrlParser: true, useUnifiedTopology: true });
 
 // Title: String,

@@ -1,6 +1,12 @@
 import { MongoClient } from "mongodb";
+import dotenv from "dotenv";
+dotenv.config();
 
-const connectionString = process.env.MONGODB_URI;
+const connectionString = process.env.MONGODB_STRING
+if (!connectionString) {
+  throw new Error("MONGODB_STRING is not defined in the environment variables.");
+}
+const test = console.log("whattf" + connectionString);
 const client = new MongoClient(connectionString, { useNewUrlParser: true, useUnifiedTopology: true });
 
 async function connectToDatabase() {

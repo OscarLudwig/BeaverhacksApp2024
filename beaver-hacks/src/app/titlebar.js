@@ -4,12 +4,15 @@ export default function TitleBar() {
   return (
     <div className="titlebar">
       <div className="left">
-        <Image
-          src="/logo.png"
-          alt="Logo"
-          width={40}
-          height={40}
-        />
+        <a href="/">
+          <Image
+            src="/logo.png"
+            alt="Logo"
+            width={45}
+            height={45}
+            className="titlebar-logo"
+          />
+        </a>
         <nav>
           <a href="#" className="hover:underline">Home</a>
           <a href="#" className="hover:underline">Message board</a>

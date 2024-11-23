@@ -1,28 +1,24 @@
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-  --osu-color: rgb(195, 75, 36);
+  --background: #1e1e1e;
+  --foreground: #000000;
+  --text: #ffffff;
+  --osu-color: #C34B24;
   --highlight: #e67a00;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+
 
 body {
-  color: white; /* Set text color to white for better contrast */
-  background-color: black; /* Set background color to black */
+  color: var(--text); /* Set text color to foreground */
+  background-color: var(--background); /* Set background color to background */
   margin: 0;
   padding: 0;
   font-family: Arial, sans-serif;
 }
 
-/* Custom OSU color class */
-.osu-color {
-  color: rgb(195, 75, 36);
+body, html {
+  height: 100%;
+  margin: 0;
 }
 
 .container {
@@ -32,18 +28,17 @@ body {
   justify-content: center;
   min-height: 100vh;
   text-align: center;
-  padding: 8px;
-  padding-bottom: 20px;
   gap: 16px;
   font-family: var(--font-geist-sans);
+  min-height: 100vh;
 }
 
 .main {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  grid-row-start: 2;
   align-items: center;
+  flex: 1; /* Ensure the main content takes up the remaining space */
 }
 
 .main.sm {
@@ -134,14 +129,6 @@ body {
   background-color: #1a1a1a;
 }
 
-.footer {
-  display: flex;
-  gap: 6px;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-}
-
 .link {
   display: flex;
   align-items: center;
@@ -161,16 +148,17 @@ body {
   align-items: center;
   justify-content: space-between;
   padding: 16px;
-  background-color: black; /* Set background color to black */
-  color: white;
-  border-radius: 9999px;
-  margin-top: 50px; /* Adjust this value as needed */
+  background-color: var(--foreground); /* Set background color to foreground */
+  color: var(--text); /* Set text color to text */
+  border-radius: 50px;
+  margin-top: 20px; /* Adjust this value as needed */
+  height: 35px; /* Set a fixed height for the title bar */
 }
 
 .titlebar .left {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 30px;
 }
 
 .titlebar nav {
@@ -194,8 +182,8 @@ body {
 }
 
 .titlebar .button {
-  background-color: white;
-  color: black;
+  background-color: var(--background); /* Set button background color to background */
+  color: var(--text); /* Set button text color to text */
   font-weight: bold;
   padding: 8px 24px;
   border-radius: 9999px;
@@ -209,7 +197,7 @@ body {
 
 .titlebar .button.login {
   background-color: var(--highlight);
-  color: white;
+  color: var(--text);
 }
 
 .titlebar .button.login:hover {
@@ -219,4 +207,19 @@ body {
 .logo {
   max-width: 100%;
   height: auto;
+  background-color: var(--background); /* Ensure the background is transparent */
+}
+
+.footer {
+  width: 100%;
+  background-color: var(--foreground); /* Set background color to foreground */
+  color: var(--text); /* Set text color to text */
+  padding: 10px 0; /* Adjust padding to remove any extra space */
+  text-align: center; /* Optional: Center the text */
+  margin: 0; /* Ensure no margin is applied */
+}
+
+.footer a {
+  text-decoration: none; /* Remove underline from links */
+  color: var(--text); /* Ensure link color matches text color */
 }

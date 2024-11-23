@@ -1,20 +1,15 @@
 import Image from "next/image";
 import TitleBar from "./titlebar"; // Adjust the path if necessary
+import Footer from "./footer"; // Import the Footer component
 
 export default function Home() {
   return (
     <div className="container">
       <TitleBar />
       <main className="main">
-        <Image
-          className="logo"
-          src="/logo.png"
-          alt="Logo"
-          width={400} // Adjust the width as needed
-          height={400} // Adjust the height as needed
-          priority
-        />
+        <p>Welcome!!!</p>
       </main>
+      <Footer /> {/* Add the Footer component */}
     </div>
   );
 }

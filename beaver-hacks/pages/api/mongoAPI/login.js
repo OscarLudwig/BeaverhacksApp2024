@@ -46,11 +46,10 @@ export default async function handler(req, res) {
       { expiresIn: '1h' }
     );
 
-    console.log(token)
+    //console.log(token)
 
     // Set the cookie with the JWT token
     res.setHeader('Set-Cookie', serialize('auth_token', token, {
-      httpOnly: true,
       secure: process.env.NODE_ENV === 'production', // only set secure cookies in production
       maxAge: 3600, // 1 hour
       path: '/',

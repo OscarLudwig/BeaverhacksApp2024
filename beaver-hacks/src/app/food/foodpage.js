@@ -6,8 +6,8 @@ export default async function FoodPage() {
 
   return (
     <div>
-      {resturants.map((value, _) => (
-        <FoodPlace name={value.Name} openHour={value.OpeningHour} closingHour={value.ClosingHour}
+      {resturants.map((value, index) => (
+        <FoodPlace key={index} name={value.Name} openingHour={value.OpeningHour} closingHour={value.ClosingHour}
           rating={value.Rating} numberOfRatings={value.NumberOfRatings} description={value.description} />
       ))}
     </div>

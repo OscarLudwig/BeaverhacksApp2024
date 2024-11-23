@@ -1,6 +1,6 @@
 const { MongoClient } = require("mongodb");
 const dotenv = require("dotenv");
-const { createResturant } = require("./resturantsAPI");
+const { createPost } = require("./forumAPI"); // Import your createPost function
 dotenv.config();
 
 const connectionString = process.env.MONGODB_STRING;
@@ -9,74 +9,40 @@ if (!connectionString) {
 }
 const client = new MongoClient(connectionString);
 
+// Connect to the database
 async function connectToDatabase() {
-    try {
-      // Connect if not already connected (no need for `isConnected` check)
-      await client.connect();
-      const db = client.db("UserInfo");
-      return db.collection("users");
-    } catch (error) {
-      console.error("Error connecting to the database:", error);
-      throw new Error("Failed to connect to the database");
-    }
+  try {
+    await client.connect();
+    const db = client.db("forumPosts"); // Use your posts database
+    return db.collection("posts");
+  } catch (error) {
+    console.error("Error connecting to the database:", error);
+    throw new Error("Failed to connect to the database");
   }
-  
-  
-  async function createUser(Username, Password, OSUverified, CreatedDate, Email, FirstName, LastName) {
-    const users = await connectToDatabase();
-  
-    // Handle undefined values by setting them to empty string
-    const newUser = {
-      Username,
-      Password,
-      OSUverified,
-      CreatedDate,
-      Email,
-      FirstName,
-      LastName,
-    };
-  
-    // Replace undefined properties with empty string
-    Object.entries(newUser).forEach(([key, value]) => {
-      if (value === undefined) {
-        newUser[key] = "";  // Update the property directly
-      }
-    });
-  
-    const result = await users.insertOne(newUser);
-    return result;
-  }
-  
+}
 
-  async function createDefaultResturant() {
-    const users = await connectToDatabase();
-    const newResturant = {
-      Name : "Subway",
-      Rating : 3,
-      NumberOfRatings : 3,
-      Description : "subway desc",
-      OpeningHour : 1,
-      ClosingHour : 2,
-      Location : "monroe"
-    };
+// Function to create a default post
+async function createDefaultPost() {
+  const author = "testUser"; // Replace with a valid username
+  const title = "Default Post Title";
+  const body = "This is a default test post created for testing.";
+  const tags = ["test", "default"]; // Example tags
 
-    const res = createResturant("Subway",3,3,"subway desc",1,2,"monroe");
-    return res;
-  }
-
-
-
+  // Call the createPost function from postsAPI
+  const result = await createPost(author, title, body, tags);
+  return result;
+}
 
 // Wrap logic in an async function
 (async () => {
   try {
-    //const created_user = await createUser("Username", "Password", true, new Date(), "email@example.com", "First", "Last");
-    //console.log("Created User:", created_user);
-    const res = await createDefaultResturant();
-    console.log("Res:", res);
+    // Create a default post and log the result
+    const createdPost = await createDefaultPost();
+    console.log("Created Post:", createdPost);
   } catch (err) {
     console.error("Error:", err);
   } finally {
+    // Close the database connection
     await client.close();
   }
 })();

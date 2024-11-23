@@ -4,5 +4,6 @@ export default function FoodPage() {
   // fetch
   return (
     /* for place in responses add foodplace */
+    <FoodPlace title="Test" />
   );
 }

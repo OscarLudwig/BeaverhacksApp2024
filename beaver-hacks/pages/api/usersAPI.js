@@ -3,44 +3,57 @@ import { MongoClient } from "mongodb";
 const connectionString = process.env.MONGODB_URI;
 const client = new MongoClient(connectionString, { useNewUrlParser: true, useUnifiedTopology: true });
 
+async function connectToDatabase() {
+    try {
+      // Connect if not already connected (no need for `isConnected` check)
+      await client.connect();
+      const db = client.db("UserInfo");
+      return db.collection("users");
+    } catch (error) {
+      console.error("Error connecting to the database:", error);
+      throw new Error("Failed to connect to the database");
+    }
+  }
+  
 
 async function createUser(Username, Password, OSUverified, CreatedDate, Email, FirstName, LastName) {
-  return client.connect().then(() => {
-    const db = client.db("FoodPosts");
-    const users = db.collection("users");
-    const newUser = {
-      Username,
-      Password,
-      OSUverified,
-      CreatedDate,
-      Email,
-      FirstName,
-      LastName,
-    };
+  const users = await connectToDatabase();
 
-    for (const [key, value] of Object.entries(newUser)) {
-      if (value === undefined) {
-        throw new Error(`Missing field: ${key}`);
-      }
+  // Handle undefined values by setting them to empty string
+  const newUser = {
+    Username,
+    Password,
+    OSUverified,
+    CreatedDate,
+    Email,
+    FirstName,
+    LastName,
+  };
+
+  // Replace undefined properties with empty string
+  Object.entries(newUser).forEach(([key, value]) => {
+    if (value === undefined) {
+      newUser[key] = "";  // Update the property directly
     }
-
-    return users.insertOne(newUser);
   });
+
+  const result = await users.insertOne(newUser);
+  return result;
 }
 
-
 async function getUser(Username) {
-    return client.connect().then(() => {
-        const db = client.db("FoodPosts");
-        const users = db.collection("users");
-        return users.findOne({ Username });
-})}
+  const users = await connectToDatabase();
+  const user = await users.findOne({ Username });
+  return user;
+}
 
 async function updateUser(Username, Password, OSUverified, CreatedDate, Email, FirstName, LastName) {
-    return client.connect().then(() => {
-        const db = client.db("FoodPosts");
-        const users = db.collection("users");
-        return users.updateOne({ Username}, { $set: { Password, OSUverified, CreatedDate, Email, FirstName, LastName } });
-})}
+  const users = await connectToDatabase();
+  const result = await users.updateOne(
+    { Username },
+    { $set: { Password, OSUverified, CreatedDate, Email, FirstName, LastName } }
+  );
+  return result;
+}
 
 export { createUser, getUser, updateUser };

@@ -1,40 +1,35 @@
 import { verifyPassword } from "../../utils/hash";
-import { MongoClient } from "mongodb";
+import { getUser } from "./usersAPI";
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
     return res.status(405).json({ message: "Method not allowed" });
   }
 
-  const { email, password } = req.body;
+  const { username, password } = req.body;
 
-  if (!email || !password) {
-    return res.status(400).json({ message: "Username, Email and password are required." });
+  if (!username || !password) {
+    return res.status(400).json({ message: "Username and password are required." });
   }
 
   try {
-    const client = await MongoClient.connect(process.env.DATABASE_URL);
-    const db = client.db();
-
-    const user = await db.collection("users").findOne({ username });
+    // Fetch the user from the database
+    const user = await getUser(username);
 
     if (!user) {
-      client.close();
       return res.status(401).json({ message: "Invalid credentials." });
     }
 
-    const isValidPassword = await verifyPassword(password, user.password);
+    // Verify the password
+    const isValidPassword = await verifyPassword(password, user.Password);
 
     if (!isValidPassword) {
-      client.close();
       return res.status(401).json({ message: "Invalid credentials." });
     }
-
-    client.close();
 
     return res.status(200).json({ message: "Login successful." });
   } catch (error) {
-    console.error(error);
+    console.error("Error during login:", error);
     return res.status(500).json({ message: "Something went wrong." });
   }
 }

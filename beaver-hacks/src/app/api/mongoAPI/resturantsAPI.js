@@ -71,17 +71,17 @@ async function getResturant(Name) {
     });
 }
 
-async function updateRating(Name, newRating) {
+async function updateRating(Name, newRating1) {
     const resturants = await connectToDatabase();
     const returant = await resturants.findOne({
         Name
     });
-    const newRating = (Rating * NumberOfRatings + newRating) / (NumberOfRatings + 1);
+    const rating = (Rating * NumberOfRatings + newRating1) / (NumberOfRatings + 1);
     return resturants.updateOne({
         Name
     }, {
         $set: {
-            Rating: newRating,
+            Rating: rating,
             NumberOfRatings: NumberOfRatings + 1
         }
     });
@@ -109,4 +109,4 @@ async function updateResturant(Name, Rating, NumberOfRatings, Description, Openi
     return result;
 }
 
-// export { createResturant, getAllResturants, getResturant, updateRating, deleteResturant, updateResturant };
+export { createResturant, getAllResturants, getResturant, updateRating, deleteResturant, updateResturant };

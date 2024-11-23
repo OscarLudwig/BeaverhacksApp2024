@@ -1,8 +1,8 @@
 import FoodPlace from "./foodplace";
-import { getAllResturants } from '';
+import { getAllResturants } from "../api/mongoAPI/resturantsAPI"
 
-export default function FoodPage() {
-  let resturants = getAllResturants();
+export default async function FoodPage() {
+  let resturants = await getAllResturants();
 
   return (
     <ul>

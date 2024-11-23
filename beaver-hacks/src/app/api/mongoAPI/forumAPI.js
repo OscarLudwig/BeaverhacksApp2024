@@ -44,6 +44,33 @@ async function createPost(author, title, body, tags) {
     return res;
 }
 
+//upvote true for up, false for down
+async function vote(postId, user, upvote) {
+    try {
+        const posts = await connectToDatabase();
+
+        // Ensure postId is a valid ObjectId
+        const postObjectId = new ObjectId(postId);
+
+        // Build the update query
+        const updateQuery = {
+            $pull: { UpVotes: user, DownVotes: user }, // Remove user from both arrays
+            ...(upvote ? { $addToSet: { UpVotes: user } } : { $addToSet: { DownVotes: user } }) // Add user to the correct array
+        };
+
+        // Update the post
+        const result = await posts.updateOne(
+            { _id: postObjectId }, // Filter by post ID
+            updateQuery // Apply the update
+        );
+
+        return result;
+    } catch (error) {
+        console.error("Error updating vote:", error);
+        throw new Error("Failed to update vote");
+    }
+}
+
 async function handler(req, res) {
     try {
         const { page = 0 } = req.query; // Default to page 0 if not provided
@@ -76,4 +103,5 @@ async function handler(req, res) {
 module.exports = {
     createPost,
     handler,
+    vote,
 };

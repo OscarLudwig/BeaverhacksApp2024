@@ -1,21 +1,24 @@
 :root {
-  --light: #e7e7e7;
-  --dark: #2b2b2b;
-  --highlight: #e67a00;
+  --light: 231, 231, 231;
+  --dark: 43, 43, 43;
+  --highlight: 230, 122, 0;
 }
 
 body {
-  color: var(--light);
-  background: var(--dark);
+  color: rgb(var(--light));
+  background: rgb(var(--dark));
   font-family: Arial;
 }
 
 .foodplace {
-  background-color: var(--highlight);
+  background-color: rgba(var(--highlight), 0.08);
+  outline: solid rgb(var(--highlight)) 5px;
 
   width: 250px;
   height: 250px;
   padding-top: 20px;
   padding-left: 20px;;
   border-radius: 20px;
+
+  margin: 15px;
 }

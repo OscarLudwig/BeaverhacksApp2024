@@ -6,11 +6,10 @@ export default function FoodPlace(props) {
   return (
     <div className="foodplace">
       <span>{place.Name}</span>
-      <br></br>
+      <br />
       <span>Hours: {place.OpeningHour} to {place.ClosingHour}</span>
-      <br></br>
-      <p>{place.Rating} from {place.NumberOfRatings}</p>
-      <br></br>
+      <br />
+      <p>{place.Rating} star from {place.NumberOfRatings} ratings.</p>
       <p>{place.Description}</p>
     </div>
   );

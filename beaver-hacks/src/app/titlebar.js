@@ -2,15 +2,15 @@ import Image from "next/image";
 
 export default function TitleBar() {
   return (
-    <div className="flex items-center justify-between p-4 bg-gray-800 text-white rounded-full">
-      <div className="flex items-center gap-4">
+    <div className="titlebar">
+      <div className="left">
         <Image
-          src="/logo.svg"
+          src="/logo.png"
           alt="Logo"
           width={40}
           height={40}
         />
-        <nav className="flex gap-4">
+        <nav>
           <a href="#" className="hover:underline">Home</a>
           <a href="#" className="hover:underline">Message board</a>
           <a href="#" className="hover:underline">Food</a>
@@ -18,14 +18,11 @@ export default function TitleBar() {
           <a href="#" className="hover:underline">Events</a>
         </nav>
       </div>
-      <div className="flex gap-4 ml-4">
-        <button className="bg-white text-black font-bold py-2 px-6 rounded-full hover:bg-gray-200">
+      <div className="right">
+        <button className="button">
           Search
         </button>
-        <button
-          className="text-white font-bold py-2 px-6 rounded-full hover:opacity-90"
-          style={{ backgroundColor: 'var(--highlight)' }}
-        >
+        <button className="button login">
           Login
         </button>
       </div>

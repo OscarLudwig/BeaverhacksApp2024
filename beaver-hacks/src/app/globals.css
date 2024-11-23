@@ -1,17 +1,222 @@
 :root {
-  --light: #e7e7e7;
-  --dark: #2b2b2b;
-  --highlight: #C34B24;
+  --background: #ffffff;
+  --foreground: #171717;
+  --osu-color: rgb(195, 75, 36);
+  --highlight: #e67a00;
+}
 
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
 }
 
 body {
-  color: var(--light);
-  background: var(--dark);
-  font-family: Arial;
+  color: white; /* Set text color to white for better contrast */
+  background-color: black; /* Set background color to black */
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
 }
 
 /* Custom OSU color class */
 .osu-color {
   color: rgb(195, 75, 36);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  text-align: center;
+  padding: 8px;
+  padding-bottom: 20px;
+  gap: 16px;
+  font-family: var(--font-geist-sans);
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  grid-row-start: 2;
+  align-items: center;
+}
+
+.main.sm {
+  align-items: flex-start;
+}
+
+.list {
+  list-style: decimal inside;
+  text-align: center;
+  font-family: var(--font-geist-mono);
+}
+
+.list.sm {
+  text-align: left;
+}
+
+.list-item {
+  margin-bottom: 2px;
+}
+
+.code {
+  background-color: rgba(0, 0, 0, 0.05);
+  padding: 0.5px 1px;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.code.dark {
+  background-color: rgba(255, 255, 255, 0.06);
+}
+
+.button-container {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  flex-direction: column;
+}
+
+.button-container.sm {
+  flex-direction: row;
+}
+
+.button {
+  border-radius: 9999px;
+  border: 1px solid transparent;
+  transition: background-color 0.3s, border-color 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  padding: 0 16px;
+  font-size: 14px;
+}
+
+.button.sm {
+  height: 48px;
+  padding: 0 20px;
+  font-size: 16px;
+}
+
+.button.primary {
+  background-color: var(--foreground);
+  color: var(--background);
+}
+
+.button.primary:hover {
+  background-color: #383838;
+}
+
+.button.primary.dark:hover {
+  background-color: #ccc;
+}
+
+.button.secondary {
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+.button.secondary.dark {
+  border-color: rgba(255, 255, 255, 0.145);
+}
+
+.button.secondary:hover {
+  background-color: #f2f2f2;
+  border-color: transparent;
+}
+
+.button.secondary.dark:hover {
+  background-color: #1a1a1a;
+}
+
+.footer {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  text-decoration: none;
+}
+
+.link:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* Add these styles to globals.css */
+
+.titlebar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  background-color: black; /* Set background color to black */
+  color: white;
+  border-radius: 9999px;
+  margin-top: 50px; /* Adjust this value as needed */
+}
+
+.titlebar .left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.titlebar nav {
+  display: flex;
+  gap: 16px;
+}
+
+.titlebar nav a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.titlebar nav a:hover {
+  text-decoration: underline;
+}
+
+.titlebar .right {
+  display: flex;
+  gap: 16px;
+  margin-left: 16px;
+}
+
+.titlebar .button {
+  background-color: white;
+  color: black;
+  font-weight: bold;
+  padding: 8px 24px;
+  border-radius: 9999px;
+  border: none;
+  cursor: pointer;
+}
+
+.titlebar .button:hover {
+  background-color: #e2e8f0; /* bg-gray-200 */
+}
+
+.titlebar .button.login {
+  background-color: var(--highlight);
+  color: white;
+}
+
+.titlebar .button.login:hover {
+  opacity: 0.9;
+}
+
+.logo {
+  max-width: 100%;
+  height: auto;
 }

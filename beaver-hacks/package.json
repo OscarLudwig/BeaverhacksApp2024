@@ -9,7 +9,11 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "next": "^15.0.3",
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.4.5",
+    "mongodb": "^6.11.0",
+    "mongoose": "^8.8.2",
+    "next": "15.0.3",
     "nodemailer": "^6.9.16",
     "react": "19.0.0-rc-66855b96-20241106",
     "react-dom": "19.0.0-rc-66855b96-20241106"

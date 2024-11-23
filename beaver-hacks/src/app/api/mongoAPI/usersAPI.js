@@ -20,7 +20,6 @@ async function connectToDatabase() {
       throw new Error("Failed to connect to the database");
     }
   }
-  
 
 async function createUser(Username, Password, OSUverified, CreatedDate, Email, FirstName, LastName) {
   const users = await connectToDatabase();

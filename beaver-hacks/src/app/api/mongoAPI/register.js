@@ -1,6 +1,11 @@
+<<<<<<<< HEAD:beaver-hacks/src/app/api/register/route.js
+import { hashPassword } from "../../utils/hash";
+import { createUser, getUser } from "../mongoAPI/usersAPI";
+========
 import { hashPassword } from "../../../utils/hash";
 import { createUser, getUser } from "./usersAPI";
 
+>>>>>>>> main:beaver-hacks/src/app/api/mongoAPI/register.js
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {

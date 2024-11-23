@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import Cookie from "js-cookie";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
@@ -9,6 +10,29 @@ export default function TitleBar() {
   const [searchQuery, setSearchQuery] = useState("");
   const searchInputRef = useRef(null);
   const router = useRouter();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userName, setUserName] = useState("");
+
+  useEffect(() => {
+    // Check for the presence of the 'auth_token' cookie
+    const token = Cookie.get('auth_token');
+    if (token) {
+      setIsLoggedIn(true);
+      // If the token is present, decode it to get the user's name (this assumes the token contains the user's name)
+      const decodedToken = JSON.parse(atob(token.split('.')[1])); // Decode the JWT (assuming it's in base64 format)
+      console.log(decodedToken)
+      setUserName(decodedToken.username); // Set the user's name from the decoded token
+    }
+  }, []); // Empty dependency array to run on mount
+
+  const handleLogout = () => {
+    // Remove the 'auth_token' cookie and reset the login state
+    Cookie.remove('auth_token');
+    setIsLoggedIn(false);
+    setUserName(""); // Clear the user's name
+    // Optionally, you can redirect the user to the login page or home page
+    window.location.href = '/'; // Redirect to home after logging out
+  };
 
   useEffect(() => {
     const savedSearchQuery = localStorage.getItem("searchQuery");
@@ -97,8 +121,16 @@ export default function TitleBar() {
             </div>
           </>
         )}
+        {isLoggedIn ? (
+          <button className="button logout" onClick={handleLogout}>
+            Logout  
+          </button>
+        ) : (
+          <button className="button login" onClick={() => window.location.href = '/login'}>
+            Login
+          </button>
+        )}
       </div>
-      <a href="/login" className="button login">Login</a>
     </div>
   );
 }

@@ -1,10 +1,8 @@
-import { MongoClient } from "mongodb";
-
-import dotenv from "dotenv";
+const { MongoClient } = require("mongodb");
+const dotenv = require("dotenv");
 dotenv.config();
 
 const connectionString = process.env.MONGODB_STRING;
-
 if (!connectionString) {
     throw new Error("MONGODB_STRING is not defined in the environment variables.");
 }
@@ -76,12 +74,12 @@ async function updateRating(Name, newRating) {
     const returant = await resturants.findOne({
         Name
     });
-    const newRating = (Rating * NumberOfRatings + newRating) / (NumberOfRatings + 1);
+    newRating = (Rating * NumberOfRatings + newRating) / (NumberOfRatings + 1);
     return resturants.updateOne({
         Name
     }, {
         $set: {
-            Rating: newRating,
+            Rating: rating,
             NumberOfRatings: NumberOfRatings + 1
         }
     });
@@ -109,4 +107,11 @@ async function updateResturant(Name, Rating, NumberOfRatings, Description, Openi
     return result;
 }
 
-export { createResturant, getAllResturants, getResturant, updateRating, deleteResturant, updateResturant };
+module.exports = {
+    createResturant,
+    getAllResturants,
+    getResturant,
+    updateRating,
+    deleteResturant,
+    updateResturant,
+};

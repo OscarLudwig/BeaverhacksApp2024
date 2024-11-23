@@ -8,7 +8,7 @@ export default async function CampusPage({ url, title }) {
     <div>
       <h1>{title}</h1>
       {feed.map((value, index) => (
-        <CampusEvent key={index} title={value.title} link={value.link} name={value.creator} />
+        <CampusEvent key={index} title={value.title} link={value.link} name={value.creator} date={value.isoDate} />
       ))}
     </div>
   );

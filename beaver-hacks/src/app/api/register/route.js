@@ -1,5 +1,5 @@
 import { hashPassword } from "../../utils/hash";
-import { createUser, getUser } from "./mongoAPI/usersAPI";
+import { createUser, getUser } from "../mongoAPI/usersAPI";
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {

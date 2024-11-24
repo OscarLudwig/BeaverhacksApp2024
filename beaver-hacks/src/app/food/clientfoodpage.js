@@ -62,7 +62,7 @@ export default function ClientFoodPage({ restaurants, foodReviews }) {
         </div> */}
 
         <div className={styles.rightSide}>
-          <span className={styles.foodReviews}>Food Reviews</span>
+          <span className={styles.foodReviews}>Recent Food Reviews</span>
           <div className={styles.foodreviews}>
             {foodReviews.map((value, index) => (
               <div key={index} className={styles.foodreview}>

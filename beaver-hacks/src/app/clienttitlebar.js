@@ -29,8 +29,8 @@ export default function ClientTitleBar({ username }) {
         <a href="/" className="title-buttons">Home</a>
         <a href="/message-board" className="title-buttons">Message board</a>
         <a href="/food" className="title-buttons">Food</a>
-        <a href="/clubs" className="title-buttons">Clubs</a>
         <a href="/news" className="title-buttons">News</a>
+        <a href="/clubs" className="title-buttons">Clubs</a>
       </nav>
       <div className="search-container">
         {username !== undefined ? (

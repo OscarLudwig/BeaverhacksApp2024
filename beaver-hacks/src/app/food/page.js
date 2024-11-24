@@ -9,14 +9,7 @@ export default function About() {
       <TitleBar />
       <main className="main">
         <h1>Food</h1>
-        <Image
-          className="logo"
-          src="/logo.png"
-          alt="Logo"
-          width={400} // Adjust the width as needed
-          height={400} // Adjust the height as needed
-          priority
-        />
+        
         <FoodPage />
       </main>
       <Footer /> {/* Add the Footer component */}

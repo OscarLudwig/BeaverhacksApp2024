@@ -1,0 +1,262 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    width: 100%;
+}
+
+.main {
+    flex: 1;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.gridContainer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 20px;
+}
+
+.gridContainer > div {
+    position: relative;
+    padding: 15px;
+}
+
+.gridContainer > div:not(:nth-child(3n))::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: 1px;
+    background-color: #e0e0e0;
+}
+
+.h1 {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.gridContainer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 20px;
+}
+
+.gridItem {
+    position: relative;
+}
+
+.gridItem:not(:nth-child(3n))::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: 1px;
+    background-color: #e0e0e0;
+}
+
+
+.foodplaces {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    padding: 1px;
+  }
+  
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+  }
+  
+  .switchinput {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  .switchslider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 34px;
+  }
+  
+  .switchslider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+  }
+  
+  .switchinput:checked + .switchslider {
+    background-color: #2196F3;
+  }
+  
+  .switchinput:checked + .switchslider:before {
+    transform: translateX(26px);
+  }
+  
+  @media (max-width: 768px) {
+    .foodplaces {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .foodplaces {
+      grid-template-columns: 1fr;
+    }
+  }
+
+
+.foodplace {
+  background-color:rgb(116, 116, 116);
+  margin: 25px;
+  padding: 10px;
+  position: relative;
+  border-radius: 25px;
+}
+
+.foodpic {
+  width: 100%; /* Make the image fill the width of the parent container */
+  height: 150px; /* Fixed height for the image */
+  overflow: hidden; /* Ensures the image is clipped if it exceeds the container size */
+}
+
+.foodpic img {
+  width: 100%; /* Make sure the image stretches across the container */
+  height: 100%; /* Make the image fill the container */
+  object-fit: cover; /* Ensures the image covers the container without distortion */
+}
+
+.foodtext {
+  bottom: 0;
+  padding: 1px;
+}
+
+.foodtitle {
+  font-size: xx-large;
+  font-weight: bold;
+}
+
+.foodhours-rating {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* Align the text and the rating vertically */
+  width: 100%;
+}
+
+.rating {
+  text-align: right;
+  flex-grow: 1; /* Ensures the rating is pushed to the right */
+  margin-left:100px; /* Adds some space between the hours and rating */
+}
+
+
+.mainContainer {
+  display: flex; /* Use Flexbox */
+  width: 100%; /* Ensure it takes the full width */
+  size: 100%;
+  gap: 20px; 
+}
+
+.leftSide {
+  flex: 2; /* Relative to the right div */
+  background-color: rgb(175, 175, 175);
+  padding: 20px;
+  border-radius: 25px;
+}
+
+.rightSide {
+  flex: 1; /* Relative to the left div */
+  background-color: rgb(234, 232, 232);
+  padding: 20px;
+  border-radius: 25px;
+}
+/* Title styling */
+.foodReviews {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px; /* Space between title and food reviews */
+}
+
+.foodreviews {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Vertical gap between the reviews */
+}
+
+/* Individual food review styling */
+.foodreview {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 15px;
+  border-radius: 15px;
+  background-color: #f5f5f5; /* Light background */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  border: 1px solid #ddd; /* Light border to separate reviews */
+}
+
+/* Text Styling */
+.restaurant {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #444;
+  text-align: left;
+}
+
+.title {
+  font-size: 1em;
+  font-style: italic;
+  color: #555;
+  text-align: left;
+}
+
+.rating {
+  font-size: 0.9em;
+  color: #888;
+}
+
+/* Add hover effect to each review for interactivity */
+.foodreview:hover {
+  background-color: #e0e0e0; /* Slightly darker background on hover */
+  cursor: pointer; /* Pointer cursor on hover */
+}
+.currentlyOpen {
+  position: relative;
+  display: inline-block;
+  color: black;
+  text-align: center; /* Center text horizontally */
+  line-height: 1.5; /* Adjust for vertical alignment */
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 25px;
+  background-color: rgb(234, 232, 232);
+}
+
+
+.timestamp {
+  font-size: 0.8em;
+  color: #999;
+  text-align: right;
+}

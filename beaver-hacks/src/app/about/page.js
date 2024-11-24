@@ -55,7 +55,7 @@ export default function About() {
             <p className="important-name">
               Troy Lopez
             </p>
-            <p>
+            <p className="most-important-name">
               Charles Tang
             </p>
             <p className="important-name">

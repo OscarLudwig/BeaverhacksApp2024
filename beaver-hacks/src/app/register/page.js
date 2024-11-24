@@ -15,7 +15,7 @@ export default function Register() {
 
     async function handleSubmit(e) {
         e.preventDefault();
-        setErrorMessage(""); // Clear previous errors
+        setErrorMessage(""); // Clear previous error(s)
 
         try {
             const response = await fetch("/api/register", {

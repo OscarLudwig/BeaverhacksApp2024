@@ -48,7 +48,7 @@ async function createPost(author, title, body, tags) {
 async function vote(postId, user, upvote) {
     const posts = await connectToDatabase();
     const filter = { _id: new ObjectId(postId) };
-  
+
     const update = upvote
       ? {
           $addToSet: { UpVotes: user },  // Add to UpVotes
@@ -58,25 +58,24 @@ async function vote(postId, user, upvote) {
           $addToSet: { DownVotes: user },  // Add to DownVotes
           $pull: { UpVotes: user },  // Remove from UpVotes
         };
-  
+
     const result = await posts.updateOne(filter, update);
-  
+
     if (result.modifiedCount === 0) {
       throw new Error("Failed to update vote");
     }
-  
+
     return result;
   }
-  
 
-async function handler(req, res) {
+
+async function getPosts(page) {
     try {
-        const { page = 0 } = req.query; // Default to page 0 if not provided
         const pageNumber = parseInt(page, 10);
         const postsPerPage = 10;
 
         if (isNaN(pageNumber) || pageNumber < 0) {
-            return res.status(400).json({ message: 'Invalid page number.' });
+            return null;
         }
 
         const posts = await connectToDatabase();
@@ -90,16 +89,16 @@ async function handler(req, res) {
             .limit(postsPerPage) // Limit results
             .toArray();
 
-        res.status(200).json(results);
+        return results
     } catch (error) {
         console.error('Error fetching paginated posts:', error);
-        res.status(500).json({ message: 'Internal Server Error' });
+        return null;
     }
 }
 
 // Export using CommonJS syntax
 module.exports = {
     createPost,
-    handler,
+    getPosts,
     vote,
 };

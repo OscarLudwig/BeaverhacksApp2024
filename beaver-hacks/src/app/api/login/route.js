@@ -35,7 +35,7 @@ export async function POST(req) {
 
     // Sign the JWT token with a secret key
     const token = sign(
-      { username: user.username, userId: user._id },
+      { username: user.Username, test: "x", userId: user._id },
       process.env.JWT_SECRET,
       { expiresIn: '1h' }
     );

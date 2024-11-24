@@ -1,23 +1,21 @@
-import Image from "next/image";
-import TitleBar from "../titlebar"; // Adjust the path if necessary
-import Footer from "../footer"; // Import the Footer component
+import TitleBar from "../titlebar";
+import ClientPage from "./clientpage";
 
-export default function About() {
+export default async function MessageBoard() {
+  const response = await fetch(process.env.URL + "/api/forum", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ action: "getPosts", page: 0 }),
+  });
+  const posts = (await response.json()).message;
+
   return (
     <div className="container">
       <TitleBar />
       <main className="main">
         <h1>Message Board</h1>
-        <Image
-          className="logo"
-          src="/logo.png"
-          alt="Logo"
-          width={400} // Adjust the width as needed
-          height={400} // Adjust the height as needed
-          priority
-        />
+        <ClientPage posts={posts} />
       </main>
-      <Footer /> {/* Add the Footer component */}
     </div>
   );
 }

@@ -1,67 +1,89 @@
 const { MongoClient, ObjectId } = require("mongodb");
 // import { getResturant, updateRating } from "./resturantsAPI";
 
-const {getResturant} = require("./resturantsAPI");
-
-
-const connectionString = "mongodb+srv://tangcharles29:Ogl6HT4ej30CQidS@foodposts.yds5q.mongodb.net/?retryWrites=true&w=majority&appName=FoodPosts";
-
-const client = new MongoClient(connectionString, { useNewUrlParser: true, useUnifiedTopology: true });
-
-async function connectToDatabase() {
-  try {
-      // Connect if not already connected (no need for `isConnected` check)
-      await client.connect();
-      const db = client.db("FoodPosts");
-      return db.collection("Post");
-  } catch (error) {
-      console.error("Error connecting to the database:", error);
-      throw new Error("Failed to connect to the database");
-  }
+const connectionString = "mongodb+srv://tangcharles29:Ogl6HT4ej30CQidS@foodposts.yds5q.mongodb.net/?retryWrites=true&w=majority&appName=FoodPosts"
+if (!connectionString) {
+    throw new Error("MONGODB_STRING is not defined in the environment variables.");
 }
 
-async function createFoodPost(Restaurant, Title, TimeStamp, Rating, Description, Upvotes, Downvotes, Comments) {
-  const foodPosts = await connectToDatabase();
+const client = new MongoClient(connectionString, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+});
 
-  // Handle undefined values by setting them to empty string
-  const newFoodPost = {
-      Restaurant,
-      Title,
-      TimeStamp,
-      Rating,
-      Description,
-      Upvotes,
-      Downvotes,
-      Comments,
-  };
+// Name: String,
+//     Rating: Number,
+//     NumberOfRatings: Number,
+//     Description: String,
+//     OpeningHour: Number,
+//     ClosingHour: Number,
+//     Location: String,
 
-  // Replace undefined properties with empty string
-  Object.entries(newFoodPost).forEach(([key, value]) => {
-      if (value === undefined) {
-          newFoodPost[key] = ""; // Update the property directly
-      }
-  });
+async function connectToDatabase() {
+    try {
+        // Connect if not already connected (no need for `isConnected` check)
+        await client.connect();
+        const db = client.db("ResturantList");
+        return db.collection("resturants");
+    } catch (error) {
+        console.error("Error connecting to the database:", error);
+        throw new Error("Failed to connect to the database");
+    }
+}
 
-  // get the resturant that the food post is about
+async function createResturant(Name, Rating, NumberOfRatings, Description, OpeningHour, ClosingHour, Location) {
+    const resturants = await connectToDatabase();
 
-  // update the rating of the resturant
-  // const resturant = getResturant(newFoodPost.Title);
+    // Handle undefined values by setting them to empty string
+    const newResturant = {
+        Name,
+        Rating,
+        NumberOfRatings,
+        Description,
+        OpeningHour,
+        ClosingHour,
+        Location,
+    };
 
+    // Replace undefined properties with empty string
+    Object.entries(newResturant).forEach(([key, value]) => {
+        if (value === undefined) {
+            newResturant[key] = ""; // Update the property directly
+        }
+    });
 
-  // if (resturant != null) {
-  //     const newRating = (resturant.Rating * resturant.NumberOfRatings + Rating) / (NumberOfRatings + 1);
-  //     resturant.updateRating(newRating);
-  // }
-
-  const result = await foodPosts.insertOne(newFoodPost);
-  return result;
+    const result = await resturants.insertOne(newResturant);
+    return result;
 }
 
 // Wrap logic in an async function
 (async () => {
+
+  let openingHours = []
+  let closingHours = []
+  const weekdayOpen = 12 
+  const weekdayClose = 12 + 7
+  const satOpen = null
+  const satClose = null
+  const sunOpen = 12 + 3
+  const sunClose = 12 + 8
+
+  for (let i = 0; i < 7; i++) {
+    if (i === 7) {
+      openingHours.push(sunOpen)
+      closingHours.push(sunClose)
+    } else if (i === 6) {
+      openingHours.push(satOpen)
+      closingHours.push(satClose)
+    } else {
+      openingHours.push(weekdayOpen)
+      closingHours.push(weekdayClose)
+    }
+  }
+
   try {
-    const created_user = await createFoodPost("Dixon Cafe", "Food is Ok", new Date(), 4, "This is just a test post, the food was ok not good not bad.", 0, 0, []);
-    console.log("Created User:", created_user);
+    const createdRestaurant = await createResturant("Clubhouse", 4, 1, "n/a", openingHours, closingHours, "Marketplace West");
+    console.log("Created User:", createdRestaurant);
   } catch (err) {
     console.error("Error during voting test:", err);
   } 

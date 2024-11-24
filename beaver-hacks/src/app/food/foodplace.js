@@ -3,18 +3,19 @@ import styles from './food.module.css';
 export default function FoodPlace(props) {
   return (
     <div className={styles.foodplace}>
-      <div className="foodtext">
-        <span className="foodtitle">
-          {props.name}
+      <div className={styles.foodtext}>
+        <span className={styles.foodtitle} >
+          {props.name + " "}
         </span>
         <br/>
-        <span className="hoursratings">
-          {(props.openingHour != null && props.closingHour != null) ?
-          <span>{hourToString(props.openingHour)} - {hourToString(props.closingHour)}</span> :
-          <span>Closed today</span> }
           <span className="rating">
-            {"★".repeat(Math.round(props.rating))} {/* Render the stars */}
+             {props.rating + " " + "★".repeat(Math.round(props.rating))}
           </span>
+        <br/>
+        <span className={"cloasedColor"}>
+          {(props.openingHour != null && props.closingHour != null) ?
+          <span style={props.isOpen ? { color: 'green' } : { color: 'red' }}>{hourToString(props.openingHour)} - {hourToString(props.closingHour)}</span> :
+          <span style={{ color: 'red' }}>Closed today</span> }
         </span>
       </div>
     </div>

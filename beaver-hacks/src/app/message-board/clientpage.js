@@ -14,12 +14,10 @@ export default function ClientPage({ posts }) {
     }
   })
 
-  console.log(posts[0])
-
   return (
     <div>
-      {posts.filter((value) => value.author == "test22").map((value, index) => (
-        <Message key={index} title={value.title} author={value.author} body={value.body} votes={value.votes} />
+      {posts.map((value, index) => (
+        <Message key={index} id={value._id} title={value.title} author={value.author} body={value.body} votes={value.votes} upVote={value.upVote} downVote={value.downVote} />
       ))}
       <PostBox enabled={username} />
     </div>

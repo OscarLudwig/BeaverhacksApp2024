@@ -29,8 +29,8 @@ export async function POST(req) {
         return NextResponse.json({ message: "Invalid credentials." }, {status: 401});
       }
 
-      const { postId, upvote } = reqJson;
-      vote(postId, user, upvote)
+      const { postId, upVote } = reqJson;
+      vote(postId, user, upVote)
 
       return NextResponse.json({ message: "Success." }, {status: 200});
     case "getPosts":
@@ -40,6 +40,7 @@ export async function POST(req) {
       }
 
       let posts = await getPosts(page);
+      console.log(posts)
       posts.forEach((value) => {
         value.votes = value.UpVotes.length - value.DownVotes.length;
         value.upVote = value.UpVotes.includes(user);

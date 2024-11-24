@@ -1,13 +1,14 @@
-export default function Message({ title, author, body, votes, deletable }) {
-  async function destroy() {
+export default function Message({ id, title, author, body, votes, upVote, downVote, deletable }) {
+  async function vote(up) {
     let res = await fetch("/api/forum", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ action: "deletePost",  }),
+      body: JSON.stringify({ action: "createVote", postId: id, upVote: up }),
     });
 
     if (res.ok) {
-      // This is kinda dumb
+      // This is very dumb
+      // It would be pretty easy just to update this
       window.location.reload();
     }
   }
@@ -15,8 +16,9 @@ export default function Message({ title, author, body, votes, deletable }) {
   return (
     <div>
       <h2>{title}</h2>
-      <span>{author}</span>
-      <span>{votes}</span>
+      <span>by {author} with {votes} votes</span>
+      <button disabled={upVote} onClick={() => vote(true)}>Up</button>
+      <button disabled={downVote} onClick={() => vote(false)}>Down</button>
       { deletable && <button>Delete</button> }
       <br />
       <p>{body}</p>

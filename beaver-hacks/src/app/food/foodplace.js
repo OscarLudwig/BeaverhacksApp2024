@@ -1,6 +1,8 @@
+import styles from './food.module.css';
+
 export default function FoodPlace(props) {
   return (
-    <div className="foodplace">
+    <div className={styles.foodplace}>
       <div className="foodtext">
         <span className="foodtitle">
           {props.name}
@@ -15,8 +17,6 @@ export default function FoodPlace(props) {
           </span>
         </span>
       </div>
-      
-
     </div>
     
   );

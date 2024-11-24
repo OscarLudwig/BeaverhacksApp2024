@@ -376,50 +376,6 @@ body, html {
 }
 
 
-.foodplace {
-  background-color: rgba(var(--highlight), 0.08);
-  width: 300px;
-  height: 225px; /* Increased height to accommodate image and text */
-  margin: 25px;
-  position: relative;
-}
-
-.foodpic {
-  width: 100%; /* Make the image fill the width of the parent container */
-  height: 150px; /* Fixed height for the image */
-  overflow: hidden; /* Ensures the image is clipped if it exceeds the container size */
-}
-
-.foodpic img {
-  width: 100%; /* Make sure the image stretches across the container */
-  height: 100%; /* Make the image fill the container */
-  object-fit: cover; /* Ensures the image covers the container without distortion */
-}
-
-.foodtext {
-  position: absolute;
-  text-align: left;
-  bottom: 0;
-  padding: 4%;
-}
-
-.foodtitle {
-  font-size: xx-large;
-}
-
-.foodhours-rating {
-  display: flex;
-  justify-content: space-between;
-  align-items: center; /* Align the text and the rating vertically */
-  width: 100%;
-}
-
-.rating {
-  text-align: right;
-  flex-grow: 1; /* Ensures the rating is pushed to the right */
-  margin-left:100px; /* Adds some space between the hours and rating */
-}
-
 
 .campusevent {
   background-color: rgba(var(--highlight), 0.08);

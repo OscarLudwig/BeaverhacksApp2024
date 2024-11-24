@@ -35,10 +35,8 @@ export async function POST(req) {
 
     // Sign the JWT token with a secret key
     const token = sign(
-      { username: user.Username, test: "x", userId: user._id },
+      { username: user.Username, userId: user._id },
       process.env.JWT_SECRET,
-      // Currently the system doesn't really handle expiring tokens so ...
-      { expiresIn: '100000h' }
     );
 
     //console.log(token)

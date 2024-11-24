@@ -44,39 +44,43 @@ export default function ClientFoodPage({ restaurants, foodReviews }) {
           
           <br />
           <div className={styles.foodplaces}>
-            {restaurants.filter((value) => !currentlyOpen || isOpen(day, hour, value)).map((value, index) => (
+            {/* {restaurants.filter((value) => !currentlyOpen || isOpen(day, hour, value)).map((value, index) => (
               <FoodPlace key={index} name={value.Name} openingHour={value.OpeningHour[day]} closingHour={value.ClosingHour[day]}
                 rating={value.Rating} numberOfRatings={value.NumberOfRatings} description={value.description} photo={value.photoId} isOpen={isOpen(day, hour, value)} />
+            ))} */}
+            {restaurants
+            .filter((value) => !currentlyOpen || isOpen(day, hour, value)) 
+            .map((value, index) => (
+              <FoodPlace 
+                key={index} 
+                name={value.Name} 
+                openingHour={value.OpeningHour[day]} 
+                closingHour={value.ClosingHour[day]}
+                rating={value.Rating} 
+                numberOfRatings={value.NumberOfRatings} 
+                description={value.description} 
+                photo={value.photoId} 
+                isOpen={isOpen(day, hour, value)} 
+              />
             ))}
           </div>
         </div>
-        {/* <div className={styles.rightSide}>
-          <span className={styles.foodReviews}>Food Reviews</span>
-          <div className={styles.foodreviews}>
-            {foodReviews.map((value, index) => (
-              <div key={index} className={styles.foodreview}>
-                <span>{value.Restaurant}</span>
-                <br />
-                <span>{value.Title}</span>
-                <br />
-                <span>{value.Rating}</span>
-              </div>
-            ))}
-          </div>
-        </div> */}
 
         <div className={styles.rightSide}>
           <span className={styles.foodReviews}>Recent Food Reviews</span>
           <div className={styles.foodreviews}>
-            {foodReviews.map((value, index) => (
+            {[...foodReviews].reverse().map((value, index) => (
               <div key={index} className={styles.foodreview}>
                 <span className={styles.timestamp}>{formatTimestamp(value.TimeStamp)}</span>
                 <span className={styles.restaurant}>{value.Restaurant}</span>
                 <span className={styles.title}>{value.Title}</span>
-                <span className={styles.rating}>Rating: {value.Rating + " " + "★".repeat(Math.round(value.Rating))}</span>
+                <span className={styles.rating}>
+                  Rating: {value.Rating + " " + "★".repeat(Math.round(value.Rating))}
+                </span>
               </div>
             ))}
           </div>
+
         </div>
       </div>
     </div>

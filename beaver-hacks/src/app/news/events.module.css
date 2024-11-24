@@ -1,33 +1,68 @@
+/* Styling for the event container */
 .campusevent {
   background-color: rgba(var(--highlight), 0.08);
   outline: solid rgb(var(--highlight)) 5px;
-
   width: 350px;
   padding: 20px;
   border-radius: 20px;
-
-  margin: 15px;
-  margin-bottom: 30px;
+  margin: 15px 15px 30px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.campustitle:link {
-  font-size: larger;
+/* Hover effect for event container */
+.campusevent:hover {
+  transform: scale(1.05); /* Slight scaling on hover */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* Deeper shadow */
 }
 
-.campustitle:link {
-  color:rgb(var(--light));
+/* Styling for the title link */
+.campustitle {
+  font-size: 1.5em; /* Larger title size */
+  color: rgb(var(--light));
   text-decoration: none;
+  font-weight: bold;
+  text-align: center;
+  display: block; /* Ensures the title spans full width */
+  background-color: orange;
+  color: white; /* Text color for contrast */
+  padding: 10px;
+  border-radius: 10px; /* Rounded corners for the title background */
+  margin-bottom: 10px; /* Space below the title */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Shadow for the title background */
+  transition: box-shadow 0.2s;
 }
 
-.campustitle:visited {
-  color:rgb(var(--light));
-  text-decoration: none;
+/* Hover effect for the title */
+.campustitle:hover {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
+/* Styling for the description */
 .campusdesc {
   font-size: smaller;
+  color: rgba(var(--light), 0.8);
+  line-height: 1.5; /* Better readability */
+  margin-bottom: 5px; /* Spacing between descriptions */
 }
 
+/* Add a "review-style" star rating */
+.rating {
+  display: flex;
+  justify-content: center; /* Center-align stars */
+  margin-top: 10px;
+}
+
+.rating span {
+  font-size: 1.2em;
+  color: gold; /* Gold stars for a review look */
+  margin: 0 2px; /* Spacing between stars */
+}
+
+/* Grid container for multiple events */
 .eventgrid {
   display: flex;
+  flex-wrap: wrap; /* Allows wrapping for smaller screens */
+  gap: 20px; /* Adds consistent spacing between items */
+  justify-content: center; /* Centers the items horizontally */
 }

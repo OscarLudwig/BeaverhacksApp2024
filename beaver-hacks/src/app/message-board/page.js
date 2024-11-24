@@ -18,7 +18,11 @@ export default async function MessageBoard({ searchParams }) {
   let username = undefined;
   if (token) {
     token = token.value;
-    username = JSON.parse(atob(token.split('.')[1])).username
+    try {
+      username = JSON.parse(atob(token.split('.')[1])).username
+    } catch (error) {
+      username = undefined;
+    }
   }
 
   const response = await fetch(process.env.URL + "/api/forum", {

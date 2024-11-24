@@ -17,8 +17,8 @@ export default function Message({ id, title, author, body, votes, upVote, downVo
     <div>
       <h2>{title}</h2>
       <span>by {author} with {votes} votes</span>
-      <button disabled={upVote || loggedin} onClick={() => vote(true)}>Up</button>
-      <button disabled={downVote || loggedin} onClick={() => vote(false)}>Down</button>
+      <button disabled={upVote || !loggedin} onClick={() => vote(true)}>Up</button>
+      <button disabled={downVote || !loggedin} onClick={() => vote(false)}>Down</button>
       <br />
       <p>{body}</p>
     </div>

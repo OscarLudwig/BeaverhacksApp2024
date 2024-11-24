@@ -6,7 +6,6 @@
   --foreground: #000000;
   --text: #ffffff;
   --osu-color: #C34B24;
-  --highlight: #e67a00;
   --foreground-rgb: 0, 0, 0;  /* adjust values based on your colors */
   --text-rgb: 255, 255, 255;  /* adjust values based on your colors */
 }

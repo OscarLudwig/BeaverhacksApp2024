@@ -486,6 +486,7 @@ body, html {
   align-items: center;
 }
 
+
 .login-box h2 {
   margin-bottom: 20px;
 }
@@ -545,7 +546,7 @@ body, html {
 .login-error {
   color: var(--bad-color);
   font-size: 14px;
-  height: 10px; /* Reduced from 20px */
+  min-height: 10px;
   margin-top: 0px;
   padding: 0px;
 }
@@ -553,7 +554,7 @@ body, html {
 .login-error-container {
   margin-top: 0px;
   padding: 0px;
-  min-height: 26px; /* Reduced from 40px */
+  min-height: 26px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -561,4 +562,26 @@ body, html {
 
 .close-button button {
   color: var(--bad-color);
+}
+
+@media (max-width: 480px) {
+  .login-box {
+    width: 170px;
+    padding: 15px;
+    top: 40vh;
+  }
+
+  .login-box h2 {
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+  }
+
+  .login-box input {
+    padding: 8px;
+    margin-bottom: 8px;
+  }
+
+  .above-spaced-h2 {
+    margin-top: 30px;
+  }
 }

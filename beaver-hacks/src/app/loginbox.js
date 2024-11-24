@@ -68,6 +68,7 @@ export default function LoginBox({ showLoginBox, setShowLoginBox, setIsLoggedIn,
                 placeholder="Username"
                 autoFocus
                 ref={loginInputRef}
+                autocapitalize="none" // Add this line
               />
               <input
                 type="password"

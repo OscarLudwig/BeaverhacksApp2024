@@ -39,11 +39,17 @@ export default function Message({ id, title, author, body, inVotes, inUpVote, in
 
   return (
     <div className={styles.message}>
-      <h2>{title}</h2>
-      <h4>by {author}</h4>
-      <button className={styles.upVote} disabled={upVote || !loggedin} onClick={() => vote(true)} />
-      <span style={{ color: votes < 0 ? "red" : "green", fontSize: 35  }}>{votes}</span>
-      <button className={styles.downVote} disabled={downVote || !loggedin} onClick={() => vote(false)} />
+      <div className={styles.messageheader}>
+        {/* Put this in the backend and make this multiline */}
+        <h2>{title.substring(0, 8)}</h2>
+        <span className={styles.votes} style={{color: votes < 0 ? "red" : "green"}}>{votes}</span>
+        <h5 style={{margin: 0}}>by {author.substring(0, 10)}</h5>
+
+        <div>
+          <button className={styles.vote} disabled={downVote || !loggedin} onClick={() => vote(false)}>👎</button>
+          <button className={styles.vote} disabled={upVote || !loggedin} onClick={() => vote(true)}>👍</button>
+        </div>
+      </div>
       <br />
       {/* Put this in the backend */}
       <p>{body.substring(0, 1024)}</p>

@@ -11,6 +11,8 @@ export default function ClientPage({ posts, page, username }) {
 
   return (
     <div>
+      <button className={styles.boardbutton} onClick={() => switchPage(page <= 1 ? 0 : page - 1)}>Previous</button>
+      <button className={styles.boardbutton} onClick={() => switchPage(page + 1)}>Next</button>
       <div className={styles.messageboard}>
         {posts.map((value, index) => (
           <Message key={index} id={value._id} title={value.title} author={value.author} body={value.body}
@@ -18,8 +20,6 @@ export default function ClientPage({ posts, page, username }) {
         ))}
       </div>
       <PostBox enabled={username} />
-      <button onClick={() => switchPage(page <= 1 ? 0 : page - 1)}>Previous</button>
-      <button onClick={() => switchPage(page + 1)}>Next</button>
     </div>
   );
 }

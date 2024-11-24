@@ -1,10 +1,12 @@
 "use client"
 
 import { useState } from "react";
+import styles from "./messageboard.module.css"
 
 export default function PostBox({ enabled }) {
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
+  const [buttonEnabled, setButtonEnabled] = useState(true);
 
   async function submit() {
     let res = await fetch("/api/forum", {
@@ -14,25 +16,30 @@ export default function PostBox({ enabled }) {
     });
 
     if (res.ok) {
+      setButtonEnabled(false);
+
       // This is kinda dumb
-      window.location.href = '/message-board';
+      setInterval(() => window.location.href = '/message-board', 1000);
     }
   }
 
   return (
     <div>
       <input
+        className={styles.titleinput}
         type="text"
         value={enabled ? title : "Please login."}
-        onChange={(event) => {setTitle(event.target.value)}}
+        onChange={(event) => setTitle(event.target.value.replace('\n', '').substring(0, 8))}
       />
-      <button disabled={!enabled} onClick={submit}>Submit</button>
+      <button className={styles.boardbutton} disabled={!enabled || !buttonEnabled} onClick={submit}>Submit</button>
       <br />
       <textarea
-        rows="4"
-        cols="50"
+        style={{marginBottom: 100, maxWidth: 1000}}
+        className={styles.titleinput}
+        rows="8"
+        cols="100"
         value={enabled ? body : "Please login."}
-        onChange={(event) => {setBody(event.target.value.replace('\n', ''))}}
+        onChange={(event) => setBody(event.target.value.replace('\n', '').substring(0, 1024))}
       />
     </div>
   );

@@ -1,3 +1,4 @@
+import Footer from "../footer";
 import TitleBar from "../titlebar";
 import ClientPage from "./clientpage";
 import { cookies } from "next/headers";
@@ -39,6 +40,7 @@ export default async function MessageBoard({ searchParams }) {
         <h1>Message Board</h1>
         <ClientPage posts={posts} page={page} username={username} />
       </main>
+      <Footer />
     </div>
   );
 }

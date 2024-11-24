@@ -1,0 +1,33 @@
+.campusevent {
+  background-color: rgba(var(--highlight), 0.08);
+  outline: solid rgb(var(--highlight)) 5px;
+
+  width: 350px;
+  padding: 20px;
+  border-radius: 20px;
+
+  margin: 15px;
+  margin-bottom: 30px;
+}
+
+.campustitle:link {
+  font-size: larger;
+}
+
+.campustitle:link {
+  color:rgb(var(--light));
+  text-decoration: none;
+}
+
+.campustitle:visited {
+  color:rgb(var(--light));
+  text-decoration: none;
+}
+
+.campusdesc {
+  font-size: smaller;
+}
+
+.eventgrid {
+  display: flex;
+}

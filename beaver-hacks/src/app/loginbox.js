@@ -27,17 +27,15 @@ export default function LoginBox({ showLoginBox, setShowLoginBox, setIsLoggedIn,
         body: JSON.stringify({ username, password }),
       });
 
-      const data = await response.json();
-
-      if (data.message === "Login successful.") {
-        Cookie.set('auth_token', data.token, { secure: true, sameSite: 'strict' });
+      if (response.ok) {
         console.log('Login successful');
         setIsLoggedIn(true);
         setUserName(username);
         setShowLoginBox(false);
+        //window.location.reload()
         return; // Exit early on success
       }
-      
+
       // Only show alert for failed login attempts
       setError(data.message || 'Login failed');
     } catch (error) {
@@ -68,7 +66,7 @@ export default function LoginBox({ showLoginBox, setShowLoginBox, setIsLoggedIn,
                 placeholder="Username"
                 autoFocus
                 ref={loginInputRef}
-                autocapitalize="none" // Add this line
+                autoCapitalize="none" // Add this line
               />
               <input
                 type="password"

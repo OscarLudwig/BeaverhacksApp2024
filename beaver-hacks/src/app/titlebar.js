@@ -11,16 +11,23 @@ export default function TitleBar() {
   const [showSearchBox, setShowSearchBox] = useState(false);
   const [showLoginBox, setShowLoginBox] = useState(false);
   const router = useRouter();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false) // TODO: Make this more rigourous
   const [userName, setUserName] = useState("");
 
   useEffect(() => {
     // Check for the presence of the 'auth_token' cookie
     const token = Cookie.get('auth_token');
     if (token) {
+      let decodedToken;
+      try {
+        // If the token is present, decode it to get the user's name (this assumes the token contains the user's name)
+        decodedToken = JSON.parse(atob(token.split('.')[1])); // Decode the JWT (assuming it's in base64 format)
+      } catch (error) {
+        handleLogout();
+        return;
+      }
+
       setIsLoggedIn(true);
-      // If the token is present, decode it to get the user's name (this assumes the token contains the user's name)
-      const decodedToken = JSON.parse(atob(token.split('.')[1])); // Decode the JWT (assuming it's in base64 format)
       console.log(decodedToken)
       setUserName(decodedToken.username); // Set the user's name from the decoded token
     }
@@ -60,7 +67,7 @@ export default function TitleBar() {
         <SearchBox showSearchBox={showSearchBox} setShowSearchBox={setShowSearchBox} />
         {isLoggedIn ? (
           <button className="button logout" onClick={handleLogout}>
-            Logout  
+            Logout
           </button>
         ) : (
           <button className="button login" onClick={() => setShowLoginBox(true)}>

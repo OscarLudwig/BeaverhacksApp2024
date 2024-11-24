@@ -1,0 +1,18 @@
+.message {
+    background-color: #141414;
+    border-radius: 15px;
+    box-shadow: 5px 5px 5px #070707;
+
+    overflow-wrap: break-word;
+
+    margin: 15px;
+    padding-left: 10px;
+    padding-right: 10px;
+
+    width: 300px;
+}
+
+.messageboard {
+    display: grid;
+    grid-template-columns: auto auto auto;
+}

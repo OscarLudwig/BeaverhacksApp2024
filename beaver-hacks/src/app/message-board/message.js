@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react";
+import styles from "./messageboard.module.css"
 
 export default function Message({ id, title, author, body, inVotes, inUpVote, inDownVote, loggedin }) {
   const [votes, setVotes] = useState(inVotes);
@@ -37,13 +38,14 @@ export default function Message({ id, title, author, body, inVotes, inUpVote, in
   }
 
   return (
-    <div>
+    <div className={styles.message}>
       <h2>{title}</h2>
       <span>by {author} with {votes} votes</span>
       <button disabled={upVote || !loggedin} onClick={() => vote(true)}>Up</button>
       <button disabled={downVote || !loggedin} onClick={() => vote(false)}>Down</button>
       <br />
-      <p>{body}</p>
+      {/* Put this in the backend */}
+      <p>{body.substring(0, 1024)}</p>
     </div>
   );
 }

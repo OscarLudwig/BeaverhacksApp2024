@@ -32,7 +32,7 @@ export default function PostBox({ enabled }) {
         rows="4"
         cols="50"
         value={enabled ? body : "Please login."}
-        onChange={(event) => {setBody(event.target.value)}}
+        onChange={(event) => {setBody(event.target.value.replace('\n', ''))}}
       />
     </div>
   );

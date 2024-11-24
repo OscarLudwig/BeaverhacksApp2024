@@ -14,8 +14,6 @@ export default function ClientPage({ posts }) {
     }
   })
 
-  console.log(username)
-
   return (
     <div>
       {posts.map((value, index) => (

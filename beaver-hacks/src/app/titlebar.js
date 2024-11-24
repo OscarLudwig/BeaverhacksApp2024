@@ -1,14 +1,15 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import Cookie from "js-cookie";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import SearchBox from "./searchbox";
+import LoginBox from "./loginbox";
 
 export default function TitleBar() {
   const [showSearchBox, setShowSearchBox] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
-  const searchInputRef = useRef(null);
+  const [showLoginBox, setShowLoginBox] = useState(false);
   const router = useRouter();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userName, setUserName] = useState("");
@@ -34,54 +35,6 @@ export default function TitleBar() {
     window.location.href = '/'; // Redirect to home after logging out
   };
 
-  useEffect(() => {
-    const savedSearchQuery = localStorage.getItem("searchQuery");
-    if (savedSearchQuery) {
-      setSearchQuery(savedSearchQuery);
-    }
-  }, []);
-
-  useEffect(() => {
-    if (showSearchBox) {
-      document.body.style.overflow = 'hidden';
-      const handleEscape = (e) => {
-        if (e.key === 'Escape') {
-          setShowSearchBox(false);
-        }
-      };
-      document.addEventListener('keydown', handleEscape);
-
-      // Select all text if search box is opened and has text
-      if (searchInputRef.current) {
-        searchInputRef.current.focus();
-        if (searchQuery) {
-          searchInputRef.current.select();
-        }
-      }
-
-      return () => {
-        document.body.style.overflow = 'unset';
-        document.removeEventListener('keydown', handleEscape);
-      };
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-  }, [showSearchBox]);
-
-  const handleSearch = (e) => {
-    e.preventDefault();
-    if (searchQuery.trim()) {
-      router.push(`/search?query=${encodeURIComponent(searchQuery.trim())}`);
-    }
-    setShowSearchBox(false);
-  };
-
-  const handleSearchQueryChange = (e) => {
-    const query = e.target.value;
-    setSearchQuery(query);
-    localStorage.setItem("searchQuery", query);
-  };
-
   return (
     <div className="titlebar">
       <a href="/">
@@ -104,32 +57,17 @@ export default function TitleBar() {
         <button className="button" onClick={() => setShowSearchBox(!showSearchBox)}>
           Search
         </button>
-        {showSearchBox && (
-          <>
-            <div className="search-overlay" onClick={() => setShowSearchBox(false)} />
-            <div className="search-box" onClick={(e) => e.stopPropagation()}>
-              <form onSubmit={handleSearch}>
-                <input
-                  type="text"
-                  value={searchQuery}
-                  onChange={handleSearchQueryChange}
-                  placeholder="Type and press Enter to search"
-                  autoFocus
-                  ref={searchInputRef}
-                />
-              </form>
-            </div>
-          </>
-        )}
+        <SearchBox showSearchBox={showSearchBox} setShowSearchBox={setShowSearchBox} />
         {isLoggedIn ? (
           <button className="button logout" onClick={handleLogout}>
             Logout  
           </button>
         ) : (
-          <button className="button login" onClick={() => window.location.href = '/login'}>
+          <button className="button login" onClick={() => setShowLoginBox(true)}>
             Login
           </button>
         )}
+        <LoginBox showLoginBox={showLoginBox} setShowLoginBox={setShowLoginBox} setIsLoggedIn={setIsLoggedIn} setUserName={setUserName} />
       </div>
     </div>
   );

@@ -1,25 +1,15 @@
-<<<<<<<< HEAD:beaver-hacks/src/app/api/register/route.js
+import { NextResponse } from 'next/server';
 import { hashPassword } from "../../utils/hash";
 import { createUser, getUser } from "../mongoAPI/usersAPI";
-========
-import { hashPassword } from "../../../utils/hash";
-import { createUser, getUser } from "./usersAPI";
 
->>>>>>>> main:beaver-hacks/src/app/api/mongoAPI/register.js
-
-export default async function handler(req, res) {
-  if (req.method !== "POST") {
-    return res.status(405).json({ message: "Method not allowed" });
-  }
-
-  const { username, email, password, firstName, lastName} = req.body;
+export async function POST(req) {
+  console.log(await req.body);
+  const { username, email, password, firstName, lastName } = await req.json();
   const osuVerified = false;
   const createdDate = new Date();
 
   if (!username || !email || !password || !firstName || !lastName) {
-    return res.status(400).json({
-      message: "Username, email, password, first name, last name,",
-    });
+    return NextResponse.json({ message: "Username, email, password, first name, last name" }, { status: 400 });
   }
 
   try {
@@ -27,7 +17,7 @@ export default async function handler(req, res) {
     const existingUser = await getUser(username);
 
     if (existingUser) {
-      return res.status(409).json({ message: "User already exists." });
+      return NextResponse.json({ message: "User already exists." }, { status: 409 });
     }
 
     // Hash the password
@@ -36,9 +26,9 @@ export default async function handler(req, res) {
     // Create the new user
     await createUser(username, hashedPassword, osuVerified, createdDate, email, firstName, lastName);
 
-    return res.status(201).json({ message: "User registered successfully." });
+    return NextResponse.json({ message: "User registered successfully." }, { status: 201 });
   } catch (error) {
     console.error("Error creating user:", error);
-    return res.status(500).json({ message: "Something went wrong." });
+    return NextResponse.json({ message: "Something went wrong." }, { status: 500 });
   }
 }

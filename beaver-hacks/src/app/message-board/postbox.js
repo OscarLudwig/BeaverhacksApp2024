@@ -15,7 +15,7 @@ export default function PostBox({ enabled }) {
 
     if (res.ok) {
       // This is kinda dumb
-      window.location.reload();
+      window.location.href = '/message-board';
     }
   }
 

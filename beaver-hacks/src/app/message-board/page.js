@@ -2,7 +2,18 @@ import TitleBar from "../titlebar";
 import ClientPage from "./clientpage";
 import { cookies } from "next/headers";
 
-export default async function MessageBoard() {
+export default async function MessageBoard({ searchParams }) {
+  let page;
+  try {
+    page = parseInt((await searchParams).page)
+  } catch(error) {
+    page = 0;
+  }
+
+  if (isNaN(page)) {
+    page = 0;
+  }
+
   let token = (await cookies()).get('auth_token');
   if (token) {
     token = token.value;
@@ -11,7 +22,7 @@ export default async function MessageBoard() {
   const response = await fetch(process.env.URL + "/api/forum", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ action: "getPosts", page: 0, auth_token: token }),
+    body: JSON.stringify({ action: "getPosts", page, auth_token: token }),
   });
   const posts = (await response.json()).message;
 
@@ -20,7 +31,7 @@ export default async function MessageBoard() {
       <TitleBar />
       <main className="main">
         <h1>Message Board</h1>
-        <ClientPage posts={posts} />
+        <ClientPage posts={posts} page={page} />
       </main>
     </div>
   );

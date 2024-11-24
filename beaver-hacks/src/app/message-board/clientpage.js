@@ -4,7 +4,7 @@ import { useMemo } from "react";
 import PostBox from "./postbox";
 import Message from "./message";
 
-export default function ClientPage({ posts }) {
+export default function ClientPage({ posts, page }) {
   // This should maybe be a prop
   const username = useMemo(() => {
     try {
@@ -14,6 +14,10 @@ export default function ClientPage({ posts }) {
     }
   })
 
+  function switchPage(newPage) {
+    window.location.href = `/message-board?page=${newPage}`;
+  }
+
   return (
     <div>
       {posts.map((value, index) => (
@@ -21,6 +25,8 @@ export default function ClientPage({ posts }) {
           votes={value.votes} upVote={value.upVote} downVote={value.downVote} loggedin={username !== undefined} />
       ))}
       <PostBox enabled={username} />
+      <button onClick={() => switchPage(page <= 1 ? 0 : page - 1)}>Previous</button>
+      <button onClick={() => switchPage(page + 1)}>Next</button>
     </div>
   );
 }

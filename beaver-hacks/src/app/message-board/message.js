@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react";
+import styles from "./messageboard.module.css"
 
 export default function Message({ id, title, author, body, inVotes, inUpVote, inDownVote, loggedin }) {
   const [votes, setVotes] = useState(inVotes);
@@ -37,13 +38,21 @@ export default function Message({ id, title, author, body, inVotes, inUpVote, in
   }
 
   return (
-    <div>
-      <h2>{title}</h2>
-      <span>by {author} with {votes} votes</span>
-      <button disabled={upVote || !loggedin} onClick={() => vote(true)}>Up</button>
-      <button disabled={downVote || !loggedin} onClick={() => vote(false)}>Down</button>
+    <div className={styles.message}>
+      <div className={styles.messageheader}>
+        {/* Put this in the backend and make this multiline */}
+        <h2>{title.substring(0, 8)}</h2>
+        <span className={styles.votes} style={{color: votes < 0 ? "red" : "green"}}>{votes}</span>
+        <h5 style={{margin: 0}}>by {author.substring(0, 10)}</h5>
+
+        <div>
+          <button className={styles.vote} disabled={downVote || !loggedin} onClick={() => vote(false)}>👎</button>
+          <button className={styles.vote} disabled={upVote || !loggedin} onClick={() => vote(true)}>👍</button>
+        </div>
+      </div>
       <br />
-      <p>{body}</p>
+      {/* Put this in the backend */}
+      <p>{body.substring(0, 1024)}</p>
     </div>
   );
 }

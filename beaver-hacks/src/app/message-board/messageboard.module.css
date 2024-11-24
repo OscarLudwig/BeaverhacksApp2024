@@ -1,0 +1,85 @@
+.message {
+    background-color: #141414;
+    border-radius: 15px;
+    box-shadow: 5px 5px 5px #070707;
+
+    overflow-wrap: break-word;
+    text-align: left;
+
+    margin: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+
+    width: 300px;
+}
+
+.messageheader {
+    display: grid;
+    grid-template-columns: auto auto;
+}
+
+.votes {
+    font-size: 35px;
+    text-align: right;
+    margin-top: 15px;
+}
+
+.messageboard {
+    display: grid;
+    grid-template-columns: auto auto auto;
+}
+
+.vote {
+    background-color: transparent;
+    border: none;
+    float: right;
+
+    font-size: x-large;
+}
+
+.boardbutton {
+    background-color: #141414;
+    color: white;
+    font-size: larger;
+    padding: 10px;
+    margin: 10px;
+
+    border-radius: 15px;
+    border: none;
+}
+
+.boardbutton {
+    background-color: #141414;
+    color: white;
+    font-size: larger;
+    padding: 10px;
+    margin: 10px;
+
+    border-radius: 8px;
+    border: none;
+}
+
+.boardbutton:hover {
+    background-color: #070707;
+}
+
+.boardbutton:active {
+    padding: 8px;
+    margin: 12px;
+}
+
+.boardbutton:disabled {
+    background-color: #242424;
+    color: #EFEFEF;
+}
+
+.titleinput {
+    background-color: #141414;
+    color: white;
+    font-size: larger;
+    padding: 10px;
+    margin: 10px;
+
+    border-radius: 8px;
+    border: none;
+}

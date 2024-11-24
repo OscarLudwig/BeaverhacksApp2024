@@ -1,18 +1,22 @@
 "use client"
 
-import { useMemo } from "react";
+import { useEffect, useState } from "react";
 import PostBox from "./postbox";
 import Message from "./message";
+import Cookie from "js-cookie";
 
 export default function ClientPage({ posts, page }) {
   // This should maybe be a prop
-  const username = useMemo(() => {
+  const [username, setUsername] = useState(undefined);
+
+  useEffect(() => {
     try {
-      return JSON.parse(atob(token.split('.')[1])).username;
+      const token = Cookie.get('auth_token');
+      setUsername(JSON.parse(atob(token.split('.')[1])).username)
     } catch (error) {
-      return undefined;
+      setUsername(undefined);
     }
-  })
+  });
 
   function switchPage(newPage) {
     window.location.href = `/message-board?page=${newPage}`;

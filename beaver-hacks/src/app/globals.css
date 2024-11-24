@@ -339,6 +339,10 @@ body, html {
   text-decoration: none !important;
 }
 
+.button.login {
+  min-width: 80px; /* Set the desired minimum width in pixels */
+}
+
 .search-container {
   display: flex;
   align-items: center;

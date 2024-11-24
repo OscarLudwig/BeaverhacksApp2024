@@ -1,12 +1,7 @@
-<<<<<<<< HEAD:beaver-hacks/src/app/api/login/route.js
-import { verifyPassword } from "../../utils/hash";
-import { getUser } from "../mongoAPI/usersAPI";
-========
 import { sign } from 'jsonwebtoken';
 import { serialize } from 'cookie';
 import { getUser } from "./usersAPI";
 import { verifyPassword } from "../../../utils/hash";
->>>>>>>> main:beaver-hacks/src/app/api/mongoAPI/login.js
 
 export default async function handler(req, res) {
 
@@ -48,10 +43,10 @@ export default async function handler(req, res) {
     const token = sign(
       { username: user.username, userId: user._id },
       process.env.JWT_SECRET,
-      { expiresIn: '1h' }
+      // Currently the system doesn't really handle expiring tokens so ...
+      // Also I don't think this is called
+      { expiresIn: '100000h' }
     );
-
-    console.log(token)
 
     // Set the cookie with the JWT token
     res.setHeader('Set-Cookie', serialize('auth_token', token, {

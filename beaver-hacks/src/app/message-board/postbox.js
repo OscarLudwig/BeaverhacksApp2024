@@ -26,7 +26,7 @@ export default function PostBox({ enabled }) {
         value={enabled ? title : "Please login."}
         onChange={(event) => {setTitle(event.target.value)}}
       />
-      <button onClick={submit}>Submit</button>
+      <button disabled={!enabled} onClick={submit}>Submit</button>
       <br />
       <textarea
         rows="4"

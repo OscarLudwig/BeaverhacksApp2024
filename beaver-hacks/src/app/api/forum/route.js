@@ -40,7 +40,6 @@ export async function POST(req) {
       }
 
       let posts = await getPosts(page);
-      console.log(posts)
       posts.forEach((value) => {
         value.votes = value.UpVotes.length - value.DownVotes.length;
         value.upVote = value.UpVotes.includes(user);

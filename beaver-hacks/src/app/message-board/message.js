@@ -1,4 +1,4 @@
-export default function Message({ id, title, author, body, votes, upVote, downVote, deletable }) {
+export default function Message({ id, title, author, body, votes, upVote, downVote, loggedin }) {
   async function vote(up) {
     let res = await fetch("/api/forum", {
       method: "POST",
@@ -17,9 +17,8 @@ export default function Message({ id, title, author, body, votes, upVote, downVo
     <div>
       <h2>{title}</h2>
       <span>by {author} with {votes} votes</span>
-      <button disabled={upVote} onClick={() => vote(true)}>Up</button>
-      <button disabled={downVote} onClick={() => vote(false)}>Down</button>
-      { deletable && <button>Delete</button> }
+      <button disabled={upVote || loggedin} onClick={() => vote(true)}>Up</button>
+      <button disabled={downVote || loggedin} onClick={() => vote(false)}>Down</button>
       <br />
       <p>{body}</p>
     </div>

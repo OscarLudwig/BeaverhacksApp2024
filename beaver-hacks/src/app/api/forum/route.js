@@ -34,7 +34,20 @@ export async function POST(req) {
 
       return NextResponse.json({ message: "Success." }, {status: 200});
     case "getPosts":
-      const { page } = reqJson;
-      return NextResponse.json({ message: await getPosts(page) }, {status: 200});
+      const { page, auth_token=undefined } = reqJson;
+      if (!user && auth_token) {
+        user = JSON.parse(atob(auth_token.split('.')[1])).username;
+      }
+
+      let posts = await getPosts(page);
+      posts.forEach((value) => {
+        value.votes = value.UpVotes.length - value.DownVotes.length;
+        value.upVote = value.UpVotes.includes(user);
+        value.downVote = value.DownVotes.includes(user);
+
+        value.UpVotes = undefined;
+        value.DownVotes = undefined;
+      })
+      return NextResponse.json({ message: posts }, {status: 200});
   }
 }

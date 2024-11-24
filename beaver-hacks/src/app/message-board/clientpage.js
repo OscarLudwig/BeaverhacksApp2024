@@ -1,24 +1,27 @@
 "use client"
 
-import { useState, useEffect } from "react";
-import Cookie from "js-cookie";
+import { memo } from "react";
 import PostBox from "./postbox";
 import Message from "./message";
 
 export default function ClientPage({ posts }) {
-  // Enabled really should be a prop
-  const [enabled, setEnabled] = useState(true)
+  // This should maybe be a prop
+  const username = memo(() => {
+    try {
+      return JSON.parse(atob(token.split('.')[1])).username;
+    } catch (error) {
+      return undefined;
+    }
+  })
 
-  useEffect(() => {
-    setEnabled(Cookie.get('auth_token'));
-  }, []);
+  console.log(posts[0])
 
   return (
     <div>
-      {posts.map((value, index) => (
-        <Message key={index} title={value.title} author={value.author} body={value.body} />
+      {posts.filter((value) => value.author == "test22").map((value, index) => (
+        <Message key={index} title={value.title} author={value.author} body={value.body} votes={value.votes} />
       ))}
-      <PostBox enabled={enabled} />
+      <PostBox enabled={username} />
     </div>
   );
 }

@@ -4,12 +4,13 @@ import { useState } from "react";
 
 export default function PostBox({ enabled }) {
   const [title, setTitle] = useState('');
+  const [body, setBody] = useState('');
 
   async function submit() {
     let res = await fetch("/api/forum", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ action: "createPost", title, body: "", tags: [] }),
+      body: JSON.stringify({ action: "createPost", title, body, tags: [] }),
     });
 
     if (res.ok) {
@@ -26,6 +27,13 @@ export default function PostBox({ enabled }) {
         onChange={(event) => {setTitle(event.target.value)}}
       />
       <button onClick={submit}>Submit</button>
+      <br />
+      <textarea
+        rows="4"
+        cols="50"
+        value={enabled ? body : "Please login."}
+        onChange={(event) => {setBody(event.target.value)}}
+      />
     </div>
   );
 }

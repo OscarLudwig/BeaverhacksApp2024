@@ -1,4 +1,4 @@
-import { MongoClient } from "mongodb";
+import { MongoClient, Timestamp } from "mongodb";
 import { getResturant, updateRating } from "./resturantsAPI";
 import dotenv from "dotenv";
 dotenv.config();
@@ -11,12 +11,14 @@ if (!connectionString) {
 
 const client = new MongoClient(connectionString, { useNewUrlParser: true, useUnifiedTopology: true });
 
+// Restaurant: String,
 // Title: String,
-//     Rating: Number,
-//     Description: String,
-//     Upvotes: Number,
-//     Downvotes: Number,
-//     Comments: Array,
+// Rating: Number,
+// TimeStamp: Date,
+// Description: String,
+// Upvotes: Number,
+// Downvotes: Number,
+// Comments: Array,
 
 async function connectToDatabase() {
     try {
@@ -30,12 +32,14 @@ async function connectToDatabase() {
     }
 }
 
-async function createFoodPost(Title, Rating, Description, Upvotes, Downvotes, Comments) {
+async function createFoodPost(Restaurant, Title, TimeStamp, Rating, Description, Upvotes, Downvotes, Comments) {
     const foodPosts = await connectToDatabase();
 
     // Handle undefined values by setting them to empty string
     const newFoodPost = {
+        Restaurant,
         Title,
+        TimeStamp,
         Rating,
         Description,
         Upvotes,
@@ -53,11 +57,11 @@ async function createFoodPost(Title, Rating, Description, Upvotes, Downvotes, Co
     // get the returant that the food post is about
 
     // update the rating of the returant
-    const returant = getResturant(newFoodPost.Title);
+    const restaurant = getResturant(newFoodPost.Title);
 
-    if (returant != null) {
-        const newRating = (Rating * NumberOfRatings + newRating) / (NumberOfRatings + 1);
-        returant.updateRating(newRating);
+    if (restaurant != null) {
+        const newRating = (restaurant.Rating * restaurant.NumberOfRatings + Rating) / (NumberOfRatings + 1);
+        restaurant.updateRating(newRating);
     }
 
     const result = await foodPosts.insertOne(newFoodPost);
@@ -77,14 +81,6 @@ async function getFoodPost(Title) {
     });
 }
 
-async function updateRating(Title, newRating) {
-    const foodPosts = await connectToDatabase();
-    const foodPost = await foodPosts.findOne({
-        Title
-    });
-    const newRating = (Rating * NumberOfRatings + newRating) / (NumberOfRatings + 1);
-    return foodPosts.updateOne({ Title }, { $set: { Rating: newRating } });
-}
 
 async function deleteFoodPost(Title) {
     const foodPosts = await connectToDatabase();

@@ -1,11 +1,6 @@
 export default function FoodPlace(props) {
   return (
     <div className="foodplace">
-      <div className="foodpic">
-        {props.photo != null ? (
-          <img src={`/${props.photo}.jpg`} alt="Food" />
-        ) : "no photo id"}
-      </div>
       <div className="foodtext">
         <span className="foodtitle">
           {props.name}

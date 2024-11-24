@@ -8,7 +8,7 @@ function isOpen(day, hour, restaurant) {
   return restaurant.OpeningHour[day] <= hour && restaurant.ClosingHour[day] >= hour
 }
 
-export default function ClientFoodPage({ restaurants }) {
+export default function ClientFoodPage({ restaurants, foodReviews }) {
   const [currentlyOpen, setCurrentlyOpen] = useState(false);
   const now = new Date();
   const day = (now.getDay() + 6) % 7
@@ -27,6 +27,18 @@ export default function ClientFoodPage({ restaurants }) {
         {restaurants.filter((value) => !currentlyOpen || isOpen(day, hour, value)).map((value, index) => (
           <FoodPlace key={index} name={value.Name} openingHour={value.OpeningHour[day]} closingHour={value.ClosingHour[day]}
             rating={value.Rating} numberOfRatings={value.NumberOfRatings} description={value.description} photo={value.photoId} />
+        ))}
+      </div>
+      <span>Food Reviews</span>
+      <div className={styles.foodreviews}>
+        {foodReviews.map((value, index) => (
+          <div key={index} className={styles.foodreview}>
+            <span>{value.Restaurant}</span>
+            <br />
+            <span>{value.Title}</span>
+            <br />
+            <span>{value.Rating}</span>
+          </div>
         ))}
       </div>
     </div>

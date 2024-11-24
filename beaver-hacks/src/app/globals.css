@@ -6,8 +6,10 @@
   --foreground: #000000;
   --text: #ffffff;
   --osu-color: #C34B24;
+  --highlight: #e67a00;
+  --foreground-rgb: 0, 0, 0;  /* adjust values based on your colors */
+  --text-rgb: 255, 255, 255;  /* adjust values based on your colors */
 }
-
 
 body {
   color: var(--text); /* Set text color to foreground */
@@ -31,7 +33,6 @@ body, html {
   text-align: center;
   gap: 16px;
   font-family: var(--font-geist-sans);
-  min-height: 100vh;
 }
 
 .main {
@@ -40,6 +41,7 @@ body, html {
   gap: 8px;
   align-items: center;
   flex: 1; /* Ensure the main content takes up the remaining space */
+  padding-top: 90px; /* Height of titlebar + top margin + some extra space */
 }
 
 .main.sm {
@@ -142,69 +144,6 @@ body, html {
   text-underline-offset: 4px;
 }
 
-/* Add these styles to globals.css */
-
-.titlebar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 16px;
-  background-color: var(--foreground); /* Set background color to foreground */
-  color: var(--text); /* Set text color to text */
-  border-radius: 50px;
-  margin-top: 20px; /* Adjust this value as needed */
-  height: 35px; /* Set a fixed height for the title bar */
-}
-
-.titlebar .left {
-  display: flex;
-  align-items: center;
-  gap: 30px;
-}
-
-.titlebar nav {
-  display: flex;
-  gap: 16px;
-}
-
-.titlebar nav a {
-  text-decoration: none;
-  color: inherit;
-}
-
-.titlebar nav a:hover {
-  text-decoration: underline;
-}
-
-.titlebar .right {
-  display: flex;
-  gap: 16px;
-  margin-left: 16px;
-}
-
-.titlebar .button {
-  background-color: var(--background); /* Set button background color to background */
-  color: var(--text); /* Set button text color to text */
-  font-weight: bold;
-  padding: 8px 24px;
-  border-radius: 9999px;
-  border: none;
-  cursor: pointer;
-}
-
-.titlebar .button:hover {
-  background-color: #e2e8f0; /* bg-gray-200 */
-}
-
-.titlebar .button .login {
-  background-color: var(--highlight);
-  color: var(--osu-color);
-}
-
-.titlebar .button .login:hover {
-  opacity: 0.9;
-}
-
 .logo {
   max-width: 100%;
   height: auto;
@@ -213,23 +152,230 @@ body, html {
 
 .footer {
   width: 100%;
-  background-color: var(--foreground); /* Set background color to foreground */
-  color: var(--text); /* Set text color to text */
-  padding: 10px 0; /* Adjust padding to remove any extra space */
-  text-align: center; /* Optional: Center the text */
-  margin: 0; /* Ensure no margin is applied */
+  height: 80px;
+  background-color: var(--foreground);
+  color: var(--text);
+  padding: 10px 0;
+  text-align: center;
+  margin: 0;
+  display: flex;
+  align-items: flex-start; /* Change to flex-start */
+  justify-content: center;
 }
 
 .footer a {
-  text-decoration: none; /* Remove underline from links */
-  color: var(--text); /* Ensure link color matches text color */
+  position: relative;
+  overflow: hidden;
+  padding: 4px 12px;
+  margin-top: 10px;
+  border-radius: 999px;
+  text-decoration: none;
+  color: var(--text);
 }
 
-body {
-  color: rgb(var(--light));
-  background: rgb(var(--dark));
-  font-family: Arial;
+.footer a:hover {
+  text-decoration: none !important;
+  box-shadow: 
+    0 0 0 6px var(--foreground),
+    0 0 0 10px var(--text);
+  border-radius: 999px;
+  overflow: visible;
 }
+
+.title-buttons {
+  position: relative;
+  overflow: hidden;
+  padding: 4px 12px;
+  border-radius: 999px;
+  box-shadow: 
+    0 0 0 6px rgba(var(--foreground-rgb), 0),
+    0 0 0 10px rgba(var(--text-rgb), 0);
+  transition: box-shadow 5s ease-in-out;
+}
+
+.title-buttons:hover {
+  text-decoration: none !important;
+  box-shadow: 
+    0 0 0 6px rgba(var(--foreground-rgb), 1),
+    0 0 0 10px rgba(var(--text-rgb), 1);
+  border-radius: 999px;
+  overflow: visible;
+}
+
+.button:hover .button {
+  text-decoration: none !important;
+}
+
+.page-content {
+  max-width: 1000px; /* Set the maximum width */
+  margin: 0 auto; /* Center the content */
+  padding: 0 20px; /* Optional: Add some padding for better spacing */
+}
+
+.page-content p {
+  text-align: left; /* Align only <p> text to the left */
+}
+
+.team-members {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+  align-items: flex-end; /* Align items to the bottom */
+  font-size: 0.5rem;
+  align-self: baseline; /* Align to the baseline of other text */
+}
+
+.important-name {
+  font-weight: bold;
+  font-size: 1.1rem;
+  position: relative;
+  top: 15px; /* Adjust the alignment by 1px */
+}
+
+
+/* new */
+
+
+
+/* temporary */
+
+.search-box {
+  position: fixed;
+  top: 50vh;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.9);
+  padding: 12px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  width: 500px;
+  max-width: 90vw;
+}
+
+.search-box form {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.search-box input {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  font-size: 14px;
+  background: rgba(0, 0, 0, 0.2);
+  color: white;
+  outline: none; /* Remove default focus outline */
+}
+
+.search-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.search-overlay {
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 110%;
+  height: 110%;
+  min-width: 110vw;
+  min-height: 110vh;
+  z-index: 999;
+  pointer-events: auto;
+}
+
+
+/* Titlebar */
+
+
+.titlebar {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: fit-content;
+  max-width: 1200px; /* Optional: limit max width */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  background-color: var(--foreground); /* Set background color to foreground */
+  color: var(--text); /* Set text color to text */
+  border-radius: 50px;
+  height: auto; /* Allow height to adjust */
+  z-index: 100;
+  flex-wrap: wrap; /* Allow wrapping */
+}
+
+.titlebar nav {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap; /* Allow wrapping */
+}
+
+.titlebar nav a {
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.05s linear;
+}
+
+.titlebar .button {
+  background-color: var(--background); /* Set button background color to background */
+  color: var(--text); /* Set button text color to text */
+  font-weight: bold;
+  padding: 0 16px;
+  border-radius: 9999px;
+  border: 1px solid transparent;
+  border: none;
+  cursor: pointer;
+  margin-left: 10px;
+  text-decoration: none !important;
+}
+
+.titlebar .button:hover {
+  background-color: #e2e8f0; /* bg-gray-200 */
+  text-decoration: none !important;
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+}
+
+.search-container .button {
+  margin-right: 10px; /* Adjust the spacing as needed */
+}
+
+/* Media query for mobile devices */
+@media (max-width: 600px) {
+  .titlebar {
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Align items to the start */
+  }
+
+  .titlebar nav {
+    width: 100%; /* Take full width */
+    justify-content: center; /* Align items to the start */
+  }
+
+  .titlebar .button {
+    margin-left: 0; /* Remove left margin */
+    margin-top: 10px; /* Add top margin for spacing */
+  }
+
+  /* Add this CSS to ensure the main content appears below the titlebar */
+  .main {
+    clear: both;
+    padding-top: 280px; /* Adjust padding to ensure spacing from the titlebar */
+    position: relative; /* Ensure it doesn't overlap the titlebar */
+    z-index: 1; /* Ensure main content is below the titlebar */
+  }
+}
+
 
 .foodplace {
   background-color: rgba(var(--highlight), 0.08);

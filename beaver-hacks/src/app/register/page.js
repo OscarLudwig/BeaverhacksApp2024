@@ -12,7 +12,7 @@ export default function Register() {
     async function handleSubmit(e) {
         e.preventDefault();
 
-        const response = await fetch("/api/mongoAPI/register", {
+        const response = await fetch("/api/register", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
@@ -24,6 +24,7 @@ export default function Register() {
             }),
         });
 
+        console.log(await response);
         const data = await response.json();
         alert(data.message);
     }

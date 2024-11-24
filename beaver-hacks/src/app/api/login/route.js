@@ -1,21 +1,15 @@
+import { NextResponse } from 'next/server';
+
 import { sign } from 'jsonwebtoken';
 import { serialize } from 'cookie';
-import { getUser } from "./usersAPI";
-import { verifyPassword } from "../../../utils/hash";
+import { getUser } from "../mongoAPI/usersAPI";
+import { verifyPassword } from "../../utils/hash";
 
-export default async function handler(req, res) {
-
-  //console.log(process.env.JWT_SECRET);  // Logs the value of JWT_SECRET to the console
-
-
-  if (req.method !== "POST") {
-    return res.status(405).json({ message: "Method not allowed" });
-  }
-
-  const { username, password } = req.body;
+export async function POST(req) {
+  const { username, password } = await req.json();
 
   if (!username || !password) {
-    return res.status(400).json({ message: "Username and password are required." });
+    return NextResponse.json({ message: "Username and password are required." }, {status: 400});
   }
 
   try {
@@ -23,20 +17,20 @@ export default async function handler(req, res) {
     const user = await getUser(username);
 
     if (!user) {
-      return res.status(401).json({ message: "Invalid credentials." });
+      return NextResponse.json({ message: "Invalid credentials." }, {status: 401});
     }
 
     // Verify the password
     const isValidPassword = await verifyPassword(password, user.Password);
 
     if (!isValidPassword) {
-      return res.status(401).json({ message: "Invalid credentials." });
+      return NextResponse.json({ message: "Invalid credentials." }, { status: 401 });
     }
 
     // Ensure that the JWT_SECRET is defined
     if (!process.env.JWT_SECRET) {
       console.error('JWT_SECRET is not defined in environment variables.');
-      return res.status(500).json({ message: "Server error: JWT secret not defined." });
+      return NextResponse.json({ message: "Server error: JWT secret not defined."  }, { status: 500 });
     }
 
     // Sign the JWT token with a secret key
@@ -46,19 +40,18 @@ export default async function handler(req, res) {
       { expiresIn: '1h' }
     );
 
-    console.log(token)
+    //console.log(token)
 
     // Set the cookie with the JWT token
-    res.setHeader('Set-Cookie', serialize('auth_token', token, {
-      httpOnly: true,
+    let headers = {'Set-Cookie': serialize('auth_token', token, {
       secure: process.env.NODE_ENV === 'production', // only set secure cookies in production
       maxAge: 3600, // 1 hour
       path: '/',
-    }));
+    })};
 
-    return res.status(200).json({ message: "Login successful." });
+    return NextResponse.json({ message: "Login successful."  }, { status: 200, headers: headers });
   } catch (error) {
     console.error("Error during login:", error);
-    return res.status(500).json({ message: "Something went wrong." });
+    return NextResponse.json({ message: "Something went wrong."  }, { status: 500 });
   }
 }

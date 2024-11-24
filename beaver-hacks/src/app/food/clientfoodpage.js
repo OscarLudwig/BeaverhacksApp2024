@@ -25,7 +25,7 @@ export default function ClientFoodPage({ restaurants }) {
       <div className="foodplaces">
         {restaurants.filter((value) => !openOnly || isOpen(day, hour, value)).map((value, index) => (
           <FoodPlace key={index} name={value.Name} openingHour={value.OpeningHour[day]} closingHour={value.ClosingHour[day]}
-            rating={value.Rating} numberOfRatings={value.NumberOfRatings} description={value.description} />
+            rating={value.Rating} numberOfRatings={value.NumberOfRatings} description={value.description} photo={value.photoId} />
         ))}
       </div>
     </div>

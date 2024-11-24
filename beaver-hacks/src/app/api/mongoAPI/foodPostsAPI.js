@@ -32,11 +32,12 @@ async function connectToDatabase() {
     }
 }
 
-async function createFoodPost(Restaurant, Title, TimeStamp, Rating, Description, Upvotes, Downvotes, Comments) {
+async function createFoodPost(User, Restaurant, Title, TimeStamp, Rating, Description, Upvotes, Downvotes, Comments) {
     const foodPosts = await connectToDatabase();
 
     // Handle undefined values by setting them to empty string
     const newFoodPost = {
+        User,
         Restaurant,
         Title,
         TimeStamp,
@@ -60,7 +61,7 @@ async function createFoodPost(Restaurant, Title, TimeStamp, Rating, Description,
     const restaurant = getResturant(newFoodPost.Title);
 
     if (restaurant != null) {
-        const newRating = (restaurant.Rating * restaurant.NumberOfRatings + Rating) / (NumberOfRatings + 1);
+        const newRating = (restaurant.Rating * restaurant.NumberOfRatings + Rating) / (restaurant.NumberOfRatings + 1);
         restaurant.updateRating(newRating);
     }
 

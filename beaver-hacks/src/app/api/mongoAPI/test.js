@@ -2,7 +2,7 @@ const { MongoClient, ObjectId } = require("mongodb");
 // import { getResturant, updateRating } from "./resturantsAPI";
 const { getResturant, updateRating} = require("./resturantsAPI");
 
-
+// loool u really thikn this connection string works (gl with that)
 const connectionString = "mongodb+srv://tangcharles29:Ogl6HT4ej30CQidS@foodposts.yds5q.mongodb.net/?retryWrites=true&w=majority&appName=FoodPosts";
 
 const client = new MongoClient(connectionString, { useNewUrlParser: true, useUnifiedTopology: true });

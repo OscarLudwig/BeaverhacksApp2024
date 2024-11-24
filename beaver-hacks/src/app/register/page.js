@@ -11,9 +11,11 @@ export default function Register() {
     const [password, setPassword] = useState("");
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
 
     async function handleSubmit(e) {
         e.preventDefault();
+        setErrorMessage(""); // Clear previous errors
         
         try {
             const response = await fetch("/api/register", {
@@ -31,14 +33,13 @@ export default function Register() {
             const data = await response.json();
             
             if (response.ok) {
-                alert(data.message);
-                router.push('/login'); // Redirect to login page after successful registration
+                router.back();
             } else {
-                alert(data.message || 'Registration failed');
+                setErrorMessage(data.message || 'Registration failed');
             }
         } catch (error) {
             console.error('Registration error:', error);
-            alert('An error occurred during registration');
+            setErrorMessage('An error occurred during registration');
         }
     }
 
@@ -79,8 +80,11 @@ export default function Register() {
                         onChange={(e) => setPassword(e.target.value)}
                     />
                     <div className={styles.buttonContainer}>
-                    <button type="submit" 
-                                className={`${styles.registerButton}`}>
+                        {errorMessage && (
+                            <p className={styles.errorMessage}>{errorMessage}</p>
+                        )}
+                        <button type="submit" 
+                            className={`${styles.registerButton}`}>
                             Register
                         </button>
                         <button type="button" 

@@ -18,10 +18,10 @@
     padding: 10px;
     margin-bottom: 10px;
     border: 1px solid rgba(var(--light), 1);
-    border-radius: 5px;
+    border-radius: 25px;
     box-sizing: border-box;
-    background-color: var(--background);
-    color: var(--text);
+    background-color: white;
+    color: black;
 }
 
 .formContainer button {
@@ -36,11 +36,6 @@
     transition: all 0.3s ease;
 }
 
-.formContainer button.cancelButton {
-    color: red !important;
-    background-color: var(--background);
-}
-
 .buttonContainer {
     display: flex;
     flex-direction: column;
@@ -48,7 +43,7 @@
 }
 
 .registerButton {
-    background-color: var(--foreground);
+    background-color: var(--background);
 }
 
 .registerButton:hover {
@@ -56,14 +51,12 @@
 }
 
 .cancelButton {
-    background-color: var(--background);
-    color: red;
-    transition: all 0.3s ease;
+    color: red !important;
 }
 
 .cancelButton:hover {
-    background-color: var(--osu-color);
-    color: var(--text);
+    background-color: var(--osu-color) !important;
+    color: var(--text) !important;
 }
 
 .wrapper {
@@ -100,4 +93,11 @@
     font-weight: bold;
     text-align: center;
     text-shadow: 0 0 30px black, 0 0 70px black, 0 0 90px black; /* increased blur radius values */
+}
+
+.errorMessage {
+    color: red;
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 0.9rem;
 }

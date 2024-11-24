@@ -16,3 +16,23 @@
     display: grid;
     grid-template-columns: auto auto auto;
 }
+
+.upVote {
+    background-color: green;
+    border: none;
+
+    width: 25px;
+    height: 25px;
+
+    margin: 15px;
+}
+
+.downVote {
+    background-color: red;
+    border: none;
+
+    width: 25px;
+    height: 25px;
+
+    margin: 15px;
+}

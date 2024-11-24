@@ -40,9 +40,10 @@ export default function Message({ id, title, author, body, inVotes, inUpVote, in
   return (
     <div className={styles.message}>
       <h2>{title}</h2>
-      <span>by {author} with {votes} votes</span>
-      <button disabled={upVote || !loggedin} onClick={() => vote(true)}>Up</button>
-      <button disabled={downVote || !loggedin} onClick={() => vote(false)}>Down</button>
+      <h4>by {author}</h4>
+      <button className={styles.upVote} disabled={upVote || !loggedin} onClick={() => vote(true)} />
+      <span style={{ color: votes < 0 ? "red" : "green", fontSize: 35  }}>{votes}</span>
+      <button className={styles.downVote} disabled={downVote || !loggedin} onClick={() => vote(false)} />
       <br />
       {/* Put this in the backend */}
       <p>{body.substring(0, 1024)}</p>

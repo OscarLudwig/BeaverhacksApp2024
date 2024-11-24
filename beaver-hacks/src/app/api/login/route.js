@@ -48,7 +48,7 @@ export async function POST(req) {
       path: '/',
     })};
 
-    return NextResponse.json({ message: "Login successful."  }, { status: 200, headers: headers });
+    return NextResponse.json({ message: "Login successful."  }, { status: 200, headers });
   } catch (error) {
     console.error("Error during login:", error);
     return NextResponse.json({ message: "Something went wrong."  }, { status: 500 });

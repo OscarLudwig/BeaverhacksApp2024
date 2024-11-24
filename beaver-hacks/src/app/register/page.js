@@ -16,7 +16,7 @@ export default function Register() {
     async function handleSubmit(e) {
         e.preventDefault();
         setErrorMessage(""); // Clear previous errors
-        
+
         try {
             const response = await fetch("/api/register", {
                 method: "POST",
@@ -31,9 +31,9 @@ export default function Register() {
             });
 
             const data = await response.json();
-            
+
             if (response.ok) {
-                router.back();
+                window.location.href = '/'
             } else {
                 setErrorMessage(data.message || 'Registration failed');
             }

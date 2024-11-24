@@ -9,15 +9,7 @@ export default function About() {
     <div className="container">
       <TitleBar />
       <main className="main">
-        <h1>Events</h1>
-        <Image
-          className="logo"
-          src="/logo.png"
-          alt="Logo"
-          width={400} // Adjust the width as needed
-          height={400} // Adjust the height as needed
-          priority
-        />
+        <h1>News</h1>
         <div className={styles.eventgrid}>
           <CampusPage title="Sports" url="https://news.oregonstate.edu/releases/feed/athletics" />
           <CampusPage title="General" url="https://news.oregonstate.edu/releases/feed" />

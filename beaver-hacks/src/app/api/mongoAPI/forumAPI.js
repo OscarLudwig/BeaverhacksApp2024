@@ -1,4 +1,4 @@
-const { MongoClient } = require("mongodb");
+const { MongoClient, ObjectId } = require("mongodb");
 const dotenv = require("dotenv");
 dotenv.config();
 
@@ -46,30 +46,28 @@ async function createPost(author, title, body, tags) {
 
 //upvote true for up, false for down
 async function vote(postId, user, upvote) {
-    try {
-        const posts = await connectToDatabase();
-
-        // Ensure postId is a valid ObjectId
-        const postObjectId = new ObjectId(postId);
-
-        // Build the update query
-        const updateQuery = {
-            $pull: { UpVotes: user, DownVotes: user }, // Remove user from both arrays
-            ...(upvote ? { $addToSet: { UpVotes: user } } : { $addToSet: { DownVotes: user } }) // Add user to the correct array
+    const posts = await connectToDatabase();
+    const filter = { _id: new ObjectId(postId) };
+  
+    const update = upvote
+      ? {
+          $addToSet: { UpVotes: user },  // Add to UpVotes
+          $pull: { DownVotes: user },  // Remove from DownVotes
+        }
+      : {
+          $addToSet: { DownVotes: user },  // Add to DownVotes
+          $pull: { UpVotes: user },  // Remove from UpVotes
         };
-
-        // Update the post
-        const result = await posts.updateOne(
-            { _id: postObjectId }, // Filter by post ID
-            updateQuery // Apply the update
-        );
-
-        return result;
-    } catch (error) {
-        console.error("Error updating vote:", error);
-        throw new Error("Failed to update vote");
+  
+    const result = await posts.updateOne(filter, update);
+  
+    if (result.modifiedCount === 0) {
+      throw new Error("Failed to update vote");
     }
-}
+  
+    return result;
+  }
+  
 
 async function handler(req, res) {
     try {

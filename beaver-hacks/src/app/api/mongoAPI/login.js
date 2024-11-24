@@ -43,9 +43,6 @@ export default async function handler(req, res) {
     const token = sign(
       { username: user.username, userId: user._id },
       process.env.JWT_SECRET,
-      // Currently the system doesn't really handle expiring tokens so ...
-      // Also I don't think this is called
-      { expiresIn: '100000h' }
     );
 
     // Set the cookie with the JWT token

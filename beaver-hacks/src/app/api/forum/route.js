@@ -1,12 +1,19 @@
 import { NextResponse } from 'next/server';
-import { cookies } from 'next/headers';
+import { verify } from 'jsonwebtoken';
 import { createPost, getPosts, vote } from '../mongoAPI/forumAPI';
 
-// TODO: Authentication
 export async function POST(req) {
   let user;
   try {
-    user = JSON.parse(atob(req.cookies.get('auth_token').value.split('.')[1])).username;
+    let token = req.cookies.get('auth_token').value;
+
+    try {
+      verify(token, process.env.JWT_SECRET)
+    } catch (error) {
+      return NextResponse.json({ message: "Invalid credentials." }, {status: 401});
+    }
+
+    user = JSON.parse(atob(token.split('.')[1])).username;
   } catch (error) {
     user = undefined;
   }
@@ -35,7 +42,13 @@ export async function POST(req) {
       return NextResponse.json({ message: "Success." }, {status: 200});
     case "getPosts":
       const { page, auth_token=undefined } = reqJson;
-      if (!user && auth_token) {
+      if (auth_token) {
+        try {
+          verify(auth_token, process.env.JWT_SECRET)
+        } catch (error) {
+          return NextResponse.json({ message: "Invalid credentials." }, {status: 401});
+        }
+
         user = JSON.parse(atob(auth_token.split('.')[1])).username;
       }
 

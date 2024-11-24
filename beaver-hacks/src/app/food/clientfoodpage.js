@@ -9,6 +9,10 @@ function isOpen(day, hour, restaurant) {
     return false
   }
 
+  if (Array.isArray(restaurant.OpeningHour[day])) {
+    return restaurant.OpeningHour[day].some((value, index) => value <= hour && restaurant.ClosingHour[day][index] >= hour)
+  }
+
   return restaurant.OpeningHour[day] <= hour && restaurant.ClosingHour[day] >= hour
 }
 

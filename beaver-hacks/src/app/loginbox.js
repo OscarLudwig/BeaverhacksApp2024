@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import Cookie from "js-cookie";
 import { useRouter } from "next/navigation";
 
-export default function LoginBox({ showLoginBox, setShowLoginBox, setIsLoggedIn, setUserName }) {
+export default function LoginBox({ showLoginBox, setShowLoginBox }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(""); // Add error state
@@ -29,10 +29,8 @@ export default function LoginBox({ showLoginBox, setShowLoginBox, setIsLoggedIn,
 
       if (response.ok) {
         console.log('Login successful');
-        setIsLoggedIn(true);
-        setUserName(username);
         setShowLoginBox(false);
-        //window.location.reload()
+        window.location.reload()
         return; // Exit early on success
       }
 

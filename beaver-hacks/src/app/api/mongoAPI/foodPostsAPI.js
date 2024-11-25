@@ -58,11 +58,10 @@ async function createFoodPost(User, Restaurant, Title, TimeStamp, Rating, Descri
     // get the returant that the food post is about
 
     // update the rating of the returant
-    const restaurant = getResturant(newFoodPost.Title);
+    const restaurant = getResturant(newFoodPost.Restaurant);
 
-    if (restaurant != null) {
-        const newRating = (restaurant.Rating * restaurant.NumberOfRatings + Rating) / (restaurant.NumberOfRatings + 1);
-        restaurant.updateRating(newRating);
+    if (restaurant.Rating !== undefined) {
+        updateRating(newFoodPost.Restaurant, Rating);
     }
 
     const result = await foodPosts.insertOne(newFoodPost);

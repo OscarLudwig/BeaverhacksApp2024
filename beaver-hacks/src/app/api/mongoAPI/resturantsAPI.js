@@ -74,28 +74,15 @@ async function updateRating(Name, newRating) {
     const returant = await resturants.findOne({
         Name
     });
-
-    if (returant.Rating == null) {
-        return resturants.updateOne({
-            Name
-        }, {
-            $set: {
-                Rating: newRating,
-                NumberOfRatings: 1
-            }
-        });
-    } else {
-        newRating = (returant.Rating * returant.NumberOfRatings + newRating) / (returant.NumberOfRatings + 1);
-        return resturants.updateOne({
-            Name
-        }, {
-            $set: {
-                Rating: rating,
-                NumberOfRatings: NumberOfRatings + 1
-            }
-        });
-    }
-
+    newRating = (returant.Rating * returant.NumberOfRatings + newRating) / (returant.NumberOfRatings + 1);
+    return resturants.updateOne({
+        Name
+    }, {
+        $set: {
+            Rating: newRating,
+            NumberOfRatings: returant.NumberOfRatings + 1
+        }
+    });
 }
 
 async function deleteResturant(Name) {

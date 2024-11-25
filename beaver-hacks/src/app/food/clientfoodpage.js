@@ -83,7 +83,7 @@ export default function ClientFoodPage({ restaurants, foodReviews }) {
       <div className={styles.mainContainer}>
         <div className={styles.leftSide}>
           <span className={styles.currentlyOpen}>
-            {"Currently Open Only  "}
+            Currently Open Only
             <label id="showall" className={styles.switch}>
               <input
                 className={styles.switchinput}

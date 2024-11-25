@@ -72,6 +72,8 @@
     display: inline-block;
     width: 60px;
     height: 34px;
+
+    margin-left: 10px;
   }
   
   .switchinput {
@@ -245,7 +247,8 @@
   display: inline-block;
   color: black;
   text-align: center; /* Center text horizontally */
-  line-height: 1.5; /* Adjust for vertical alignment */
+  line-height: 2; /* Adjust for vertical alignment */
+  font-weight: 600;
   margin-top: 10px;
   padding: 10px;
   border-radius: 25px;

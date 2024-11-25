@@ -63,11 +63,11 @@ export default function ClientFoodPage({ restaurants, foodReviews }) {
       } else {
         const errorData = await response.json();
         setErrorMessage(
-          errorData.error || "An error occurred while submitting the review."
+          errorData.error || "An error occurred while submitting the review. Login if you haven't already."
         );
       }
     } catch (error) {
-      setErrorMessage("An error occurred while submitting the review.");
+      setErrorMessage("An error occurred while submitting the review. Login if you haven't already.");
       console.error("Error submitting review:", error);
     }
   };
@@ -124,6 +124,9 @@ export default function ClientFoodPage({ restaurants, foodReviews }) {
                 <span className={styles.timestamp}>{formatTimestamp(value.TimeStamp)}</span>
                 <span className={styles.restaurant}>{value.Restaurant.substring(0, 24)}</span>
                 <span className={styles.title}>{value.Title.substring(0, 64)}</span>
+                {value.Description && (
+                  <span className={styles.description}>{value.Description}</span>
+                )}
                 <span className={styles.rating}>
                   Rating: {value.Rating + " " + "★".repeat(Math.round(value.Rating))}
                 </span>

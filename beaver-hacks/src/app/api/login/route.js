@@ -35,10 +35,8 @@ export async function POST(req) {
 
     // Sign the JWT token with a secret key
     const token = sign(
-      { username: user.Username, test: "x", userId: user._id },
+      { username: user.Username, userId: user._id },
       process.env.JWT_SECRET,
-      // Currently the system doesn't really handle expiring tokens so ...
-      { expiresIn: '100000h' }
     );
 
     //console.log(token)
@@ -50,7 +48,7 @@ export async function POST(req) {
       path: '/',
     })};
 
-    return NextResponse.json({ message: "Login successful."  }, { status: 200, headers: headers });
+    return NextResponse.json({ message: "Login successful."  }, { status: 200, headers });
   } catch (error) {
     console.error("Error during login:", error);
     return NextResponse.json({ message: "Something went wrong."  }, { status: 500 });

@@ -14,13 +14,22 @@ export default function FoodPlace(props) {
         <br/>
         <span className={"cloasedColor"}>
           {(props.openingHour != null && props.closingHour != null) ?
-          <span style={props.isOpen ? { color: 'green' } : { color: 'red' }}>{hourToString(props.openingHour)} - {hourToString(props.closingHour)}</span> :
+          <span style={props.isOpen ? { color: '#72d672' } : { color: 'red' }}>{displayHourString(props.openingHour, props.closingHour)}</span> :
           <span style={{ color: 'red' }}>Closed today</span> }
         </span>
       </div>
     </div>
     
   );
+}
+
+
+function displayHourString(openingHour, closingHour) {
+  if (!Array.isArray(openingHour)) {
+    return hourToString(openingHour) + " - " + hourToString(closingHour);
+  } else {
+    return openingHour.map((value, index) => hourToString(value) + " - " + hourToString(closingHour[index])).join(", ");
+  }
 }
 
 function hourToString(hour) {

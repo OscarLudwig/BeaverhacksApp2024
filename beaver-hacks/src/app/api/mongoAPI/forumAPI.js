@@ -72,7 +72,7 @@ async function vote(postId, user, upvote) {
 async function getPosts(page) {
     try {
         const pageNumber = parseInt(page, 10);
-        const postsPerPage = 10;
+        const postsPerPage = 12;
 
         if (isNaN(pageNumber) || pageNumber < 0) {
             return null;

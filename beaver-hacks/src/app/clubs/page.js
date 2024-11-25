@@ -8,14 +8,8 @@ export default function About() {
       <TitleBar />
       <main className="main">
         <h1>Clubs</h1>
-        <Image
-          className="logo"
-          src="/logo.png"
-          alt="Logo"
-          width={400} // Adjust the width as needed
-          height={400} // Adjust the height as needed
-          priority
-        />
+        <h2>Under Development</h2>
+        <h3><a href="https://clubs.oregonstate.edu" target="_blank" rel="noopener noreferrer">OSU Clubs</a></h3>
       </main>
       <Footer /> {/* Add the Footer component */}
     </div>

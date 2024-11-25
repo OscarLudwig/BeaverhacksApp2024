@@ -8,7 +8,12 @@ function isOpen(day, hour, restaurant) {
   if (restaurant.OpeningHour[day] == null) {
     return false;
   }
-  return restaurant.OpeningHour[day] <= hour && restaurant.ClosingHour[day] >= hour;
+
+  if (Array.isArray(restaurant.OpeningHour[day])) {
+    return restaurant.OpeningHour[day].some((value, index) => value <= hour && restaurant.ClosingHour[day][index] >= hour)
+  }
+
+  return restaurant.OpeningHour[day] <= hour && restaurant.ClosingHour[day] >= hour
 }
 
 function formatTimestamp(timestamp) {
@@ -133,6 +138,7 @@ export default function ClientFoodPage({ restaurants, foodReviews }) {
               </div>
             ))}
           </div>
+
         </div>
       </div>
 

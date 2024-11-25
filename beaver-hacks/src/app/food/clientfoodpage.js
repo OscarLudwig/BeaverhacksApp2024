@@ -18,11 +18,11 @@ function formatTimestamp(timestamp) {
 
 export default function ClientFoodPage({ restaurants, foodReviews }) {
   const [currentlyOpen, setCurrentlyOpen] = useState(false);
+  const [disabled, setDisabled] = useState(false);
   const [formData, setFormData] = useState({
-    User: "",
     Restaurant: "",
     Title: "",
-    Rating: 0,
+    Rating: 1,
     Description: "",
   });
   const [successMessage, setSuccessMessage] = useState("");
@@ -43,7 +43,7 @@ export default function ClientFoodPage({ restaurants, foodReviews }) {
     setErrorMessage("");
 
     try {
-      const response = await fetch("/foodReview", {
+      const response = await fetch("/api/foodReview", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -57,13 +57,9 @@ export default function ClientFoodPage({ restaurants, foodReviews }) {
 
       if (response.ok) {
         setSuccessMessage("Review submitted successfully!");
-        setFormData({
-          User: "",
-          Restaurant: "",
-          Title: "",
-          Rating: 0,
-          Description: "",
-        });
+        setDisabled(true);
+        // This is kinda dumb
+        setInterval(() => window.location.href = '/food', 1000);
       } else {
         const errorData = await response.json();
         setErrorMessage(
@@ -119,11 +115,15 @@ export default function ClientFoodPage({ restaurants, foodReviews }) {
         <div className={styles.rightSide}>
           <span className={styles.foodReviews}>Recent Food Reviews</span>
           <div className={styles.foodreviews}>
-            {foodReviews.map((value, index) => (
+            {[...foodReviews]
+              // This should be server side slice
+              .reverse()
+              .slice(0, 12)
+              .map((value, index) => (
               <div key={index} className={styles.foodreview}>
                 <span className={styles.timestamp}>{formatTimestamp(value.TimeStamp)}</span>
-                <span className={styles.restaurant}>{value.Restaurant}</span>
-                <span className={styles.title}>{value.Title}</span>
+                <span className={styles.restaurant}>{value.Restaurant.substring(0, 24)}</span>
+                <span className={styles.title}>{value.Title.substring(0, 64)}</span>
                 <span className={styles.rating}>
                   Rating: {value.Rating + " " + "★".repeat(Math.round(value.Rating))}
                 </span>
@@ -138,17 +138,6 @@ export default function ClientFoodPage({ restaurants, foodReviews }) {
         <h2>Submit a Review</h2>
         <form onSubmit={handleFormSubmit}>
           <div>
-            <label htmlFor="User">Your Name:</label>
-            <input
-              type="text"
-              id="User"
-              name="User"
-              value={formData.User}
-              onChange={handleFormChange}
-              required
-            />
-          </div>
-          <div>
             <label htmlFor="Restaurant">Restaurant Name:</label>
             <input
               type="text"
@@ -160,7 +149,7 @@ export default function ClientFoodPage({ restaurants, foodReviews }) {
             />
           </div>
           <div>
-            <label htmlFor="Title">Review Title:</label>
+            <label htmlFor="Title">Review Description:</label>
             <input
               type="text"
               id="Title"
@@ -183,17 +172,7 @@ export default function ClientFoodPage({ restaurants, foodReviews }) {
               required
             />
           </div>
-          <div>
-            <label htmlFor="Description">Review Body:</label>
-            <textarea
-              id="Description"
-              name="Description"
-              value={formData.Description}
-              onChange={handleFormChange}
-              required
-            />
-          </div>
-          <button type="submit">Submit</button>
+          <button disabled={disabled} type="submit">Submit</button>
         </form>
         {successMessage && <p style={{ color: "green" }}>{successMessage}</p>}
         {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}

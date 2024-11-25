@@ -18,7 +18,7 @@ function isOpen(day, hour, restaurant) {
 
 function formatTimestamp(timestamp) {
   const date = new Date(timestamp);
-  return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}`;
+  return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()} ${date.getHours()}:${date.getMinutes().toString().padStart(2, '0')}`;
 }
 
 export default function ClientFoodPage({ restaurants, foodReviews }) {

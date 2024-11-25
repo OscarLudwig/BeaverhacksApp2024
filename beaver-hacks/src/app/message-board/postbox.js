@@ -24,23 +24,39 @@ export default function PostBox({ enabled }) {
   }
 
   return (
-    <div>
-      <input
-        className={styles.titleinput}
-        type="text"
-        value={enabled ? title : "Please login."}
-        onChange={(event) => setTitle(event.target.value.replace('\n', '').substring(0, 8))}
-      />
-      <button className={styles.boardbutton} disabled={!enabled || !buttonEnabled} onClick={submit}>Submit</button>
-      <br />
-      <textarea
-        style={{marginBottom: 100, maxWidth: 1000}}
-        className={styles.titleinput}
-        rows="8"
-        cols="100"
-        value={enabled ? body : "Please login."}
-        onChange={(event) => setBody(event.target.value.replace('\n', '').substring(0, 1024))}
-      />
-    </div>
+    <div
+  className="postBox"
+  style={{
+    border: "2px solid aliceblue",  // Border color and width
+    borderRadius: "15px",  // Rounded corners
+    padding: "15px",  // Padding inside the div
+    boxShadow: "5px 5px 5px #070707",  // Shadow effect for depth
+  }}
+>
+  <h1>Make a Post</h1>
+  <input
+    className={styles.titleinput}
+    type="text"
+    value={enabled ? title : "Please login."}
+    onChange={(event) => setTitle(event.target.value.replace('\n', '').substring(0, 8))}
+  />
+  <button
+    className={styles.boardbutton}
+    disabled={!enabled || !buttonEnabled}
+    onClick={submit}
+  >
+    Submit
+  </button>
+  <br />
+  <textarea
+    style={{ marginBottom: 100, maxWidth: 1000 }}
+    className={styles.titleinput}
+    rows="8"
+    cols="100"
+    value={enabled ? body : "Please login."}
+    onChange={(event) => setBody(event.target.value.replace('\n', '').substring(0, 1024))}
+  />
+</div>
+
   );
 }

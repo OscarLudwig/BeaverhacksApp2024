@@ -83,3 +83,16 @@
     border-radius: 8px;
     border: none;
 }
+
+.postBox {
+    background-color: #141414;
+    border-radius: 15px;
+    box-shadow: 5px 5px 5px #070707;
+    border-color: aliceblue;
+    border-width: 2px; /* Add border width */
+    border-style: solid; /* Set border style to solid */
+    
+    margin: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+}

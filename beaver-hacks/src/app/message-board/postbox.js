@@ -29,6 +29,7 @@ export default function PostBox({ enabled }) {
         className={styles.titleinput}
         type="text"
         value={enabled ? title : "Please login."}
+        placeholder={enabled ? "New post title" : undefined}
         onChange={(event) => setTitle(event.target.value.replace('\n', '').substring(0, 8))}
       />
       <button className={styles.boardbutton} disabled={!enabled || !buttonEnabled} onClick={submit}>Submit</button>
@@ -39,6 +40,7 @@ export default function PostBox({ enabled }) {
         rows="8"
         cols="100"
         value={enabled ? body : "Please login."}
+        placeholder={enabled ? "What's on your mind?" : undefined}
         onChange={(event) => setBody(event.target.value.replace('\n', '').substring(0, 1024))}
       />
     </div>

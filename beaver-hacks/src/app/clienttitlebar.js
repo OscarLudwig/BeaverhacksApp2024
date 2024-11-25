@@ -26,7 +26,6 @@ export default function ClientTitleBar({ username }) {
         />
       </a>
       <nav>
-        <a href="/" className="title-buttons">Home</a>
         <a href="/message-board" className="title-buttons">Message board</a>
         <a href="/food" className="title-buttons">Food</a>
         <a href="/news" className="title-buttons">News</a>
@@ -35,7 +34,7 @@ export default function ClientTitleBar({ username }) {
       <div className="search-container">
         {username !== undefined ? (
           <button className="button logout" onClick={handleLogout}>
-            Logout
+            {username}
           </button>
         ) : (
           <button className="button login" onClick={() => setShowLoginBox(true)}>

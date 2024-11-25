@@ -8,7 +8,8 @@ export default function About() {
       <TitleBar />
       <main className="main">
         <h1>Clubs</h1>
-        <h3>TBD</h3>
+        <h2>Under Development</h2>
+        <h3><a href="https://clubs.oregonstate.edu" target="_blank" rel="noopener noreferrer">OSU Clubs</a></h3>
       </main>
       <Footer /> {/* Add the Footer component */}
     </div>

@@ -9,6 +9,11 @@ export default function Message({ id, title, author, body, inVotes, inUpVote, in
   const [downVote, setDownVote] = useState(inDownVote)
 
   async function vote(up) {
+    if (!loggedin) {
+      window.location.href = '/register';
+      return;
+    }
+
     let res = await fetch("/api/forum", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -46,8 +51,8 @@ export default function Message({ id, title, author, body, inVotes, inUpVote, in
         <h5 style={{margin: 0}}>by {author.substring(0, 10)}</h5>
 
         <div>
-          <button className={styles.vote} disabled={downVote || !loggedin} onClick={() => vote(false)}>👎</button>
-          <button className={styles.vote} disabled={upVote || !loggedin} onClick={() => vote(true)}>👍</button>
+          <button className={styles.vote} disabled={downVote} onClick={() => vote(false)}>👎</button>
+          <button className={styles.vote} disabled={upVote} onClick={() => vote(true)}>👍</button>
         </div>
       </div>
       <br />

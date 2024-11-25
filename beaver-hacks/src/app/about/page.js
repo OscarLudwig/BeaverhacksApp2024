@@ -18,7 +18,7 @@ export default function About() {
         />
         <div className="page-content">
           <p>
-            Welcome to BeaverHacks, where connection meets creativity in a playful
+            Welcome to Beaver Forum, where connection meets creativity in a playful
             and enticing digital playground. Here, we believe that every
             interaction can spark a little chemistry, and that the art of
             expression is a delightful dance of intrigue and allure.

@@ -46,7 +46,7 @@ export default function Register() {
     return (
         <div className={styles.wrapper}>
             <div className={styles.centerContainer}>
-                <h1 className={styles.welcomeTitle}>Welcome to BeaverHacks</h1>
+                <h1 className={styles.welcomeTitle}>Welcome to Beaver Forum</h1>
                 <form onSubmit={handleSubmit} className={styles.formContainer}>
                     <h1>Register</h1>
                     <input
